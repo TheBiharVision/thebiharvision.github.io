@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Search — The Bihar Vision</title>
+<meta name="description" content="Search episodes of The Bihar Vision by title, topic, or guest.">
+<link rel="canonical" href="https://thebiharvision.github.io/search/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="https://yt3.googleusercontent.com/AP6H5C_wCpt12OHrWK462FPNC7hil_35pnCHDnADD7OSGvSu-sKJUEl-eS_lNP2LIBMRlcso=s160-c-k-c0x00ffffff-no-rj">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main id="main-content">
+  <section class="section-tight">
+    <div class="container">
+      <p class="eyebrow">Search</p>
+      <h1>Search Episodes</h1>
+      <p class="text-secondary">This is a client-side search over our published episode dataset. It matches titles, descriptions, topics, and guest names only — it does not search full transcripts unless published.</p>
+
+      <form id="search-form" role="search" style="display:flex;gap:.75rem;max-width:520px;margin:1.5rem 0;">
+        <label class="visually-hidden" for="search-input">Search episodes</label>
+        <input class="search-field" id="search-input" type="search" placeholder="e.g. culture, education, guest name" style="flex:1;padding:.85rem 1rem;border:1px solid var(--border);">
+        <button class="btn" type="submit">Search</button>
+        <button class="btn btn-outline" type="button" id="search-clear">Clear</button>
+      </form>
+
+      <div id="search-results" class="grid grid-3" role="region" aria-label="Search results" aria-live="polite"></div>
+      <p id="search-empty" class="text-secondary" hidden>No episodes matched your search. Try a different keyword or <a href="/episodes/">browse all episodes</a>.</p>
+    </div>
+  </section>
+</main>
+<footer id="site-footer"></footer>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/components.js"></script>
+<script src="/assets/js/youtube.js"></script>
+<script src="/assets/js/search.js"></script>
+<script src="/assets/js/main.js"></script>
+</body>
+</html>
