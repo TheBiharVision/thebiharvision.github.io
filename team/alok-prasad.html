@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Alok Prasad — Host | The Bihar Vision</title>
+<meta name="description" content="Alok Prasad is the host of The Bihar Vision, leading interviews and conversations on culture, education, and entertainment.">
+<link rel="canonical" href="https://thebiharvision.github.io/team/alok-prasad.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="https://yt3.googleusercontent.com/AP6H5C_wCpt12OHrWK462FPNC7hil_35pnCHDnADD7OSGvSu-sKJUEl-eS_lNP2LIBMRlcso=s160-c-k-c0x00ffffff-no-rj">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org","@type":"ProfilePage",
+  "mainEntity":{
+    "@type":"Person",
+    "name":"Alok Prasad",
+    "jobTitle":"Host",
+    "worksFor":{"@type":"Organization","name":"The Bihar Vision"}
+  }
+}
+</script>
+</head>
+<body>
+<header id="site-header"></header>
+<main id="main-content">
+  <nav class="breadcrumb container" aria-label="Breadcrumb"><a href="/">Home</a> / <a href="/about.html">About</a> / <span aria-current="page">Alok Prasad</span></nav>
+  <section class="section-tight">
+    <div class="container profile-card">
+      <img class="profile-photo" src="/assets/img/hosts/alok-prasad.jpg" alt="Portrait of Alok Prasad, host of The Bihar Vision">
+      <div>
+        <p class="eyebrow">Host</p>
+        <h1>Alok Prasad</h1>
+        <p>Alok Prasad hosts The Bihar Vision, leading interviews and conversations on culture, education, and entertainment. <em>PLACEHOLDER — replace with a verified professional biography.</em></p>
+        <h2>Role in the Podcast</h2>
+        <p>Primary host and interviewer across episodes.</p>
+        <h2>Areas of Expertise</h2>
+        <p class="text-secondary">Unconfirmed — to be added once verified.</p>
+        <h2>Official Links</h2>
+        <p><a href="https://www.youtube.com/channel/UCq-dySuxc46S5BpDQuRGt_A" target="_blank" rel="noopener">YouTube Channel</a></p>
+        <h2>Selected Episodes</h2>
+        <div class="grid grid-3" id="host-episodes"></div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="site-footer"></footer>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/components.js"></script>
+<script src="/assets/js/youtube.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const episodes = await BiharVisionData.getEpisodes();
+  const hostEpisodes = episodes.filter(e => e.host === 'Alok Prasad').slice(0, 3);
+  document.getElementById('host-episodes').innerHTML = hostEpisodes.map(BiharVisionData.episodeCardHTML).join('');
+});
+</script>
+</body>
+</html>
