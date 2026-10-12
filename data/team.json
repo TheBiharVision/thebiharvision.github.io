@@ -1,0 +1,22 @@
+{
+  "team": [
+    {
+      "slug": "ritesh-sharma",
+      "name": "Ritesh Sharma",
+      "role": "Founder",
+      "bio": "Ritesh Sharma is the founder of The Bihar Vision. PLACEHOLDER BIO — replace with verified biography details.",
+      "expertise": [],
+      "image": "/assets/img/hosts/ritesh-sharma.jpg",
+      "social": {}
+    },
+    {
+      "slug": "alok-prasad",
+      "name": "Alok Prasad",
+      "role": "Host",
+      "bio": "Alok Prasad hosts conversations and interviews on The Bihar Vision, covering culture, education, and entertainment. PLACEHOLDER BIO — replace with verified biography details.",
+      "expertise": [],
+      "image": "/assets/img/hosts/alok-prasad.jpg",
+      "social": {}
+    }
+  ]
+}
