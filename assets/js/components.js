@@ -15,7 +15,10 @@
     </svg>`,
     facebook: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.17 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.77 8.44-4.94 8.44-9.94Z"/>
-    </svg>`
+    </svg>`,
+    search: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>`,
+    hamburger: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>`,
+    close: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>`
   };
 
   function buildHeader() {
@@ -36,22 +39,32 @@
           <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
           <span>${cfg.siteName}</span>
         </a>
+
+        <!-- Desktop-only nav links -->
         <nav class="main-nav" aria-label="Primary">
           <ul style="display:flex;gap:1.75rem;">${navLinks}</ul>
         </nav>
+
         <div class="header-actions">
-          <button class="icon-btn" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-label="Open search">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          </button>
-          <a class="btn btn-sm" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">
-            ${ICONS.youtube}
-            <span>Subscribe</span>
-          </a>
+          <!-- Desktop-only: search icon + subscribe button -->
+          <div class="desktop-actions">
+            <button class="icon-btn" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-label="Open search">
+              ${ICONS.search}
+            </button>
+            <a class="btn btn-sm" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">
+              ${ICONS.youtube}
+              <span>Subscribe</span>
+            </a>
+          </div>
+
+          <!-- Mobile-only: hamburger (opens full menu with nav + search + subscribe inside) -->
           <button class="icon-btn menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            ${ICONS.hamburger}
           </button>
         </div>
       </div>
+
+      <!-- Desktop search dropdown -->
       <div class="search-panel" id="search-panel">
         <form action="/search/" method="get" role="search">
           <label class="visually-hidden" for="header-search">Search episodes</label>
@@ -59,21 +72,39 @@
           <button class="btn" type="submit">Search</button>
         </form>
       </div>
+
+      <!-- Mobile full-screen menu: nav links + search + subscribe all inside -->
       <div class="nav-overlay" id="nav-overlay">
         <div class="header-inner" style="padding:0;">
-          <a class="brand" href="/"><img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36"><span>${cfg.siteName}</span></a>
+          <a class="brand" href="/">
+            <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
+            <span>${cfg.siteName}</span>
+          </a>
           <button class="icon-btn" id="menu-close" aria-label="Close menu">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            ${ICONS.close}
           </button>
         </div>
-        <nav class="main-nav" aria-label="Mobile primary"><ul>${navLinks}</ul></nav>
-        <a class="btn" style="margin-top:1.5rem;width:fit-content;" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">
+
+        <nav class="mobile-nav" aria-label="Mobile primary">
+          <ul>${navLinks}</ul>
+        </nav>
+
+        <div class="mobile-search">
+          <form action="/search/" method="get" role="search">
+            <label class="visually-hidden" for="mobile-search-input">Search episodes</label>
+            <input type="search" id="mobile-search-input" name="q" placeholder="Search episodes, topics, guests…" autocomplete="off">
+            <button type="submit" aria-label="Search">${ICONS.search}</button>
+          </form>
+        </div>
+
+        <a class="btn mobile-subscribe-btn" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">
           ${ICONS.youtube}
           <span>Subscribe on YouTube</span>
         </a>
       </div>
     `;
 
+    /* ---------- Desktop search dropdown toggle ---------- */
     const searchToggle = document.getElementById('search-toggle');
     const searchPanel = document.getElementById('search-panel');
     searchToggle.addEventListener('click', () => {
@@ -82,33 +113,41 @@
       if (open) document.getElementById('header-search').focus();
     });
 
+    /* ---------- Mobile full-screen menu toggle ---------- */
     const menuToggle = document.getElementById('menu-toggle');
     const navOverlay = document.getElementById('nav-overlay');
     const menuClose = document.getElementById('menu-close');
+
     menuToggle.addEventListener('click', () => {
       navOverlay.classList.add('open');
       menuToggle.setAttribute('aria-expanded', 'true');
-      navOverlay.querySelector('a').focus();
+      document.body.style.overflow = 'hidden'; // prevent background scroll while menu open
+      const firstLink = navOverlay.querySelector('.mobile-nav a');
+      if (firstLink) firstLink.focus();
     });
-    menuClose.addEventListener('click', () => {
+
+    function closeMobileMenu() {
       navOverlay.classList.remove('open');
       menuToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
       menuToggle.focus();
-    });
+    }
+
+    menuClose.addEventListener('click', closeMobileMenu);
+
     document.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
-        navOverlay.classList.remove('open');
+        closeMobileMenu();
         searchPanel.classList.remove('open');
       }
     });
 
     /* ---------- Sticky header scroll shadow ---------- */
-    const header = el;
     function onScroll() {
       if (window.scrollY > 8) {
-        header.classList.add('scrolled');
+        el.classList.add('scrolled');
       } else {
-        header.classList.remove('scrolled');
+        el.classList.remove('scrolled');
       }
     }
     window.addEventListener('scroll', onScroll, { passive: true });
