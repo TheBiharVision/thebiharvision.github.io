@@ -3,6 +3,21 @@
   const cfg = window.SITE_CONFIG;
   if (!cfg) return;
 
+  /* ---------- Real brand SVG icons (single-color, inherits currentColor) ---------- */
+  const ICONS = {
+    youtube: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.44 3.5 12 3.5 12 3.5s-7.44 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.94.56 9.38.56 9.38.56s7.44 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/>
+    </svg>`,
+    instagram: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5"/>
+      <circle cx="12" cy="12" r="4.3"/>
+      <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor" stroke="none"/>
+    </svg>`,
+    facebook: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5 3.66 9.17 8.44 9.94v-7.03H7.9v-2.91h2.54V9.86c0-2.5 1.49-3.89 3.77-3.89 1.1 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.87h2.78l-.44 2.91h-2.34V22c4.78-.77 8.44-4.94 8.44-9.94Z"/>
+    </svg>`
+  };
+
   function buildHeader() {
     const el = document.getElementById('site-header');
     if (!el) return;
@@ -28,7 +43,10 @@
           <button class="icon-btn" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-label="Open search">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
           </button>
-          <a class="btn btn-sm" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">Subscribe</a>
+          <a class="btn btn-sm" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">
+            ${ICONS.youtube}
+            <span>Subscribe</span>
+          </a>
           <button class="icon-btn menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
           </button>
@@ -49,7 +67,10 @@
           </button>
         </div>
         <nav class="main-nav" aria-label="Mobile primary"><ul>${navLinks}</ul></nav>
-        <a class="btn" style="margin-top:1.5rem;width:fit-content;" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">Subscribe on YouTube</a>
+        <a class="btn" style="margin-top:1.5rem;width:fit-content;" href="${cfg.youtube.subscribeUrl}" target="_blank" rel="noopener">
+          ${ICONS.youtube}
+          <span>Subscribe on YouTube</span>
+        </a>
       </div>
     `;
 
@@ -80,6 +101,18 @@
         searchPanel.classList.remove('open');
       }
     });
+
+    /* ---------- Sticky header scroll shadow ---------- */
+    const header = el;
+    function onScroll() {
+      if (window.scrollY > 8) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
   function buildFooter() {
@@ -100,9 +133,9 @@
             </div>
             <p style="color:#D9C2B0;max-width:32ch;">${cfg.tagline}</p>
             <div class="social-row">
-              <a class="icon-btn" style="border-color:#4A3528;color:#fff;" href="${cfg.youtube.channelUrl}" target="_blank" rel="noopener" aria-label="YouTube channel">YT</a>
-              <a class="icon-btn" style="border-color:#4A3528;color:#fff;" href="${cfg.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-              <a class="icon-btn" style="border-color:#4A3528;color:#fff;" href="${cfg.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+              <a class="icon-btn social-icon" href="${cfg.youtube.channelUrl}" target="_blank" rel="noopener" aria-label="${cfg.siteName} on YouTube">${ICONS.youtube}</a>
+              <a class="icon-btn social-icon" href="${cfg.social.instagram}" target="_blank" rel="noopener" aria-label="${cfg.siteName} on Instagram">${ICONS.instagram}</a>
+              <a class="icon-btn social-icon" href="${cfg.social.facebook}" target="_blank" rel="noopener" aria-label="${cfg.siteName} on Facebook">${ICONS.facebook}</a>
             </div>
           </div>
           <div><h3>Explore</h3>${explore}</div>
