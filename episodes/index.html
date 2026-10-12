@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Episodes — The Bihar Vision</title>
+<meta name="description" content="Browse every episode of The Bihar Vision podcast — searchable and filterable by topic, with direct links to watch on YouTube.">
+<link rel="canonical" href="https://thebiharvision.github.io/episodes/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Episodes — The Bihar Vision">
+<meta property="og:description" content="Browse every episode of The Bihar Vision podcast.">
+<meta property="og:url" content="https://thebiharvision.github.io/episodes/">
+<link rel="icon" href="https://yt3.googleusercontent.com/AP6H5C_wCpt12OHrWK462FPNC7hil_35pnCHDnADD7OSGvSu-sKJUEl-eS_lNP2LIBMRlcso=s160-c-k-c0x00ffffff-no-rj">
+<link rel="stylesheet" href="/assets/css/style.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://thebiharvision.github.io/"},
+    {"@type":"ListItem","position":2,"name":"Episodes","item":"https://thebiharvision.github.io/episodes/"}
+  ]
+}
+</script>
+</head>
+<body>
+<header id="site-header"></header>
+<main id="main-content">
+  <nav class="breadcrumb container" aria-label="Breadcrumb"><a href="/">Home</a> / <span aria-current="page">Episodes</span></nav>
+
+  <section class="section-tight">
+    <div class="container">
+      <p class="eyebrow">Archive</p>
+      <h1>All Episodes</h1>
+      <p class="text-secondary" style="max-width:60ch;">Every episode is fetched from our YouTube channel and listed below with direct links to watch. Use search or topic filters to narrow results.</p>
+
+      <div class="filters-bar" role="group" aria-label="Filter episodes by topic">
+        <button class="filter-chip" aria-pressed="true" data-topic="all">All</button>
+        <button class="filter-chip" aria-pressed="false" data-topic="Interview">Interview</button>
+        <button class="filter-chip" aria-pressed="false" data-topic="Culture">Culture</button>
+        <button class="filter-chip" aria-pressed="false" data-topic="Education">Education</button>
+        <button class="filter-chip" aria-pressed="false" data-topic="Entertainment">Entertainment</button>
+        <div class="search-field" style="margin-left:auto;">
+          <label class="visually-hidden" for="episode-filter-search">Search episodes</label>
+          <input type="search" id="episode-filter-search" placeholder="Search this archive…">
+          <button type="button" id="episode-filter-search-btn" aria-label="Search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-3" id="episode-grid" aria-live="polite">
+        <p class="text-secondary">Loading episodes…</p>
+      </div>
+      <p id="episode-empty" class="text-secondary" hidden>No episodes match your filters right now.</p>
+
+      <div class="pagination" id="pagination" hidden>
+        <button id="load-more" class="btn btn-outline">Load more episodes</button>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="site-footer"></footer>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/components.js"></script>
+<script src="/assets/js/youtube.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const grid = document.getElementById('episode-grid');
+  const empty = document.getElementById('episode-empty');
+  const loadMoreWrap = document.getElementById('pagination');
+  const loadMoreBtn = document.getElementById('load-more');
+  const searchInput = document.getElementById('episode-filter-search');
+  const searchBtn = document.getElementById('episode-filter-search-btn');
+  const chips = document.querySelectorAll('.filter-chip');
+
+  const all = await BiharVisionData.getEpisodes();
+  const params = new URLSearchParams(window.location.search);
+  let activeTopic = params.get('topic') || 'all';
+  let pageSize = 6, shown = pageSize;
+
+  chips.forEach(chip => {
+    if (chip.dataset.topic === activeTopic) { chips.forEach(c=>c.setAttribute('aria-pressed','false')); chip.setAttribute('aria-pressed','true'); }
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.setAttribute('aria-pressed', 'false'));
+      chip.setAttribute('aria-pressed', 'true');
+      activeTopic = chip.dataset.topic;
+      shown = pageSize;
+      render();
+    });
+  });
+
+  function filtered() {
+    const q = searchInput.value.trim().toLowerCase();
+    return all.filter(ep => {
+      const topicMatch = activeTopic === 'all' || (ep.topics || []).includes(activeTopic);
+      const queryMatch = !q || ep.title.toLowerCase().includes(q) || ep.description.toLowerCase().includes(q);
+      return topicMatch && queryMatch;
+    });
+  }
+
+  function render() {
+    const list = filtered();
+    if (!list.length) {
+      grid.innerHTML = '';
+      empty.hidden = false;
+      loadMoreWrap.hidden = true;
+      return;
+    }
+    empty.hidden = true;
+    grid.innerHTML = list.slice(0, shown).map(BiharVisionData.episodeCardHTML).join('');
+    loadMoreWrap.hidden = shown >= list.length;
+  }
+
+  loadMoreBtn.addEventListener('click', () => { shown += pageSize; render(); });
+  searchBtn.addEventListener('click', () => { shown = pageSize; render(); });
+  searchInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); shown = pageSize; render(); } });
+
+  render();
+});
+</script>
+</body>
+</html>
