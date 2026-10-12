@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Guests — The Bihar Vision</title>
+<meta name="description" content="Directory of verified guests who have appeared on The Bihar Vision podcast.">
+<link rel="canonical" href="https://thebiharvision.github.io/guests/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="https://yt3.googleusercontent.com/AP6H5C_wCpt12OHrWK462FPNC7hil_35pnCHDnADD7OSGvSu-sKJUEl-eS_lNP2LIBMRlcso=s160-c-k-c0x00ffffff-no-rj">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main id="main-content">
+  <nav class="breadcrumb container" aria-label="Breadcrumb"><a href="/">Home</a> / <span aria-current="page">Guests</span></nav>
+  <section class="section-tight">
+    <div class="container">
+      <p class="eyebrow">Directory</p>
+      <h1>Guests</h1>
+      <p class="text-secondary" style="max-width:60ch;">This directory lists guests who have appeared on The Bihar Vision, added only after verification against published episodes.</p>
+      <div id="guests-list" class="grid grid-3" style="margin-top:2rem;"></div>
+      <p id="guests-empty" class="text-secondary" hidden>No guest profiles have been published yet. Check back after future episodes are verified and added.</p>
+    </div>
+  </section>
+</main>
+<footer id="site-footer"></footer>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/components.js"></script>
+<script src="/assets/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const res = await fetch('/data/guests.json');
+  const data = await res.json();
+  if (!data.guests.length) {
+    document.getElementById('guests-empty').hidden = false;
+    return;
+  }
+  document.getElementById('guests-list').innerHTML = data.guests.map(g => `
+    <a class="episode-card" style="padding:1.5rem;" href="/guests/${g.slug}.html">
+      <h3>${g.name}</h3><p class="text-secondary">${g.shortBio || ''}</p>
+    </a>`).join('');
+});
+</script>
+</body>
+</html>
