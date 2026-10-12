@@ -90,6 +90,7 @@
     const legal = cfg.footerLinks.legal.map(i => `<a href="${i.href}">${i.label}</a>`).join('');
 
     el.innerHTML = `
+      <div class="footer-border-strip" role="presentation" aria-hidden="true"></div>
       <div class="container">
         <div class="footer-grid">
           <div>
@@ -97,11 +98,11 @@
               <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
               <span>${cfg.siteName}</span>
             </div>
-            <p style="color:#B5B5B5;max-width:32ch;">${cfg.tagline}</p>
+            <p style="color:#D9C2B0;max-width:32ch;">${cfg.tagline}</p>
             <div class="social-row">
-              <a class="icon-btn" style="border-color:#333;" href="${cfg.youtube.channelUrl}" target="_blank" rel="noopener" aria-label="YouTube channel">YT</a>
-              <a class="icon-btn" style="border-color:#333;" href="${cfg.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-              <a class="icon-btn" style="border-color:#333;" href="${cfg.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
+              <a class="icon-btn" style="border-color:#4A3528;color:#fff;" href="${cfg.youtube.channelUrl}" target="_blank" rel="noopener" aria-label="YouTube channel">YT</a>
+              <a class="icon-btn" style="border-color:#4A3528;color:#fff;" href="${cfg.social.instagram}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+              <a class="icon-btn" style="border-color:#4A3528;color:#fff;" href="${cfg.social.facebook}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
             </div>
           </div>
           <div><h3>Explore</h3>${explore}</div>
