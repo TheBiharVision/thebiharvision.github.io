@@ -1,29 +1,27 @@
 /* ============================================================
-   THE BIHAR VISION — EARTHY DESIGN SYSTEM
+   THE BIHAR VISION — EARTHY / MITHILA-INSPIRED DESIGN SYSTEM
+   Palette inspired by traditional Mithila (Madhubani) painting:
+   terracotta, ochre/mustard, deep maroon, indigo accent, warm ivory base.
    ============================================================ */
 
 /* ---------- Tokens ---------- */
 :root{
-  /* Base surfaces */
-  --bg:#FBF6EC;              /* warm ivory — like handmade paper */
-  --bg-secondary:#F2E6D0;    /* sandy beige section bg */
-  --bg-dark:#2C1810;         /* deep maroon-brown — like terracotta clay */
+  --bg:#FBF6EC;
+  --bg-secondary:#F2E6D0;
+  --bg-dark:#2C1810;
 
-  /* Text */
-  --text:#2B1B12;            /* deep brown-black ink */
+  --text:#2B1B12;
   --text-dark:#FBF6EC;
-  --text-secondary:#6B5744;  /* warm brown-gray */
+  --text-secondary:#6B5744;
 
-  /* Borders */
-  --border:#D9C7A3;          /* warm tan border */
+  --border:#D9C7A3;
 
-  /* Accents — use sparingly, like Mithila folk colors */
-  --accent-terracotta:#B5502D;  /* rust/terracotta — primary accent */
-  --accent-ochre:#C98A2C;       /* mustard/ochre — secondary accent */
-  --accent-indigo:#2E4057;      /* deep indigo-blue — tertiary accent */
-  --accent-maroon:#7A2E2E;      /* deep maroon — for dark-section highlights */
+  --accent-terracotta:#B5502D;
+  --accent-ochre:#C98A2C;
+  --accent-indigo:#2E4057;
+  --accent-maroon:#7A2E2E;
 
-  --focus:#B5502D;           /* terracotta focus ring — high contrast on ivory */
+  --focus:#B5502D;
 
   --font-sans: 'Inter','Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
 
@@ -52,6 +50,7 @@ body{
   color:var(--text);
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
 }
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
@@ -114,33 +113,85 @@ section{padding:var(--gap-xl) 0;}
 .site-header{
   position:sticky;top:0;z-index:100;background:rgba(251,246,236,.94);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--border);
+  transition:box-shadow var(--transition), background var(--transition);
+}
+.site-header.scrolled{
+  box-shadow:0 2px 14px rgba(44,24,16,.1);
+  background:rgba(251,246,236,.98);
 }
 .header-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;padding:1rem 1.5rem;max-width:var(--container);margin:0 auto;}
 .brand{display:flex;align-items:center;gap:.65rem;font-weight:800;font-size:1.05rem;letter-spacing:-.01em;color:var(--text);}
 .brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
+
+/* Desktop nav links */
 .main-nav{display:flex;gap:1.75rem;}
 .main-nav a{font-weight:600;font-size:.92rem;padding:.25rem 0;border-bottom:2px solid transparent;color:var(--text);}
 .main-nav a:hover,.main-nav a[aria-current="page"]{border-color:var(--accent-terracotta);}
+
 .header-actions{display:flex;align-items:center;gap:.75rem;}
+.desktop-actions{display:flex;align-items:center;gap:.75rem;}
+
+.header-actions .btn{display:inline-flex;align-items:center;gap:.45rem;}
+.header-actions .btn svg{flex-shrink:0;}
+
 .icon-btn{
   width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;
-  border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--text);
+  border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--text);flex-shrink:0;
 }
 .icon-btn:hover{background:var(--bg-secondary);}
-.menu-toggle{display:none;}
-.nav-overlay{
-  display:none;position:fixed;inset:0;background:var(--bg);z-index:200;padding:1.5rem;flex-direction:column;
-}
-.nav-overlay.open{display:flex;}
-.nav-overlay .main-nav{flex-direction:column;gap:.25rem;margin-top:2rem;}
-.nav-overlay .main-nav a{font-size:1.4rem;padding:.75rem 0;border-bottom:1px solid var(--border);}
 
+.menu-toggle{display:none;}
+
+/* ---------- MOBILE: hide desktop nav + desktop actions, show hamburger only ---------- */
 @media (max-width:860px){
   .main-nav{display:none;}
+  .desktop-actions{display:none;}
   .menu-toggle{display:inline-flex;}
 }
 
-/* Search panel */
+/* ---------- Mobile Nav Overlay (full-screen menu) ---------- */
+.nav-overlay{
+  display:none;
+  position:fixed;inset:0;
+  background:var(--bg);
+  z-index:200;
+  padding:1.5rem;
+  flex-direction:column;
+  overflow-y:auto;
+  -webkit-overflow-scrolling:touch;
+}
+.nav-overlay.open{display:flex;}
+
+/* Mobile nav links */
+.mobile-nav{margin-top:1.75rem;}
+.mobile-nav ul{display:flex;flex-direction:column;gap:.15rem;}
+.mobile-nav a{
+  display:block;font-size:1.25rem;font-weight:700;padding:.85rem 0;
+  border-bottom:1px solid var(--border);color:var(--text);
+}
+.mobile-nav a:hover,.mobile-nav a[aria-current="page"]{color:var(--accent-terracotta);}
+
+/* Mobile search (inside overlay) */
+.mobile-search{margin-top:1.75rem;}
+.mobile-search form{
+  display:flex;align-items:center;gap:.5rem;
+  border:1px solid var(--border);border-radius:999px;
+  padding:.3rem .3rem .3rem 1.1rem;background:#fff;
+}
+.mobile-search input{
+  flex:1;border:0;outline:0;font-size:1rem;background:transparent;color:var(--text);min-width:0;
+}
+.mobile-search button{
+  border:0;background:var(--accent-terracotta);color:#fff;border-radius:999px;
+  width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+
+/* Mobile subscribe button (inside overlay) */
+.mobile-subscribe-btn{
+  margin-top:1.75rem;width:100%;justify-content:center;
+}
+
+/* Desktop search dropdown panel (unrelated to mobile overlay) */
 .search-panel{
   display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--border);padding:1.25rem 1.5rem;
 }
@@ -227,13 +278,11 @@ section{padding:var(--gap-xl) 0;}
 .form-field.has-error input,.form-field.has-error textarea{border-color:var(--accent-terracotta);outline:2px solid var(--accent-terracotta);}
 .form-status[role="status"],.form-status[role="alert"]{margin-top:1rem;padding:1rem;border:1px solid var(--border);background:var(--bg-secondary);}
 
-/* Honeypot (spam trap) */
 .hp-field{position:absolute;left:-9999px;top:-9999px;}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--bg-dark);color:#fff;padding:0 0 var(--gap-md);}
 
-/* Decorative Mithila border strip — replaces the old flat top border */
 .footer-border-strip{
   width:100%;
   height:48px;
@@ -254,6 +303,14 @@ section{padding:var(--gap-xl) 0;}
   font-size:.82rem;color:#C9B8A8;
 }
 .social-row{display:flex;gap:.6rem;margin-top:1rem;}
+.social-icon{
+  color:#fff;border-color:#4A3528;
+  transition:background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+.social-icon:hover{
+  background:var(--accent-ochre);color:var(--bg-dark);border-color:var(--accent-ochre);transform:translateY(-2px);
+}
+.social-icon svg{display:block;}
 @media (max-width:860px){.footer-grid{grid-template-columns:1fr 1fr;}}
 @media (max-width:480px){.footer-grid{grid-template-columns:1fr;}}
 
@@ -288,32 +345,3 @@ th{background:var(--bg-secondary);}
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-
-/* ---------- Header: subscribe button with icon ---------- */
-.header-actions .btn{
-  display:inline-flex;align-items:center;gap:.45rem;
-}
-.header-actions .btn svg{flex-shrink:0;}
-
-/* ---------- Sticky header scroll shadow ---------- */
-.site-header{
-  transition:box-shadow var(--transition), background var(--transition);
-}
-.site-header.scrolled{
-  box-shadow:0 2px 14px rgba(44,24,16,.1);
-  background:rgba(251,246,236,.98);
-}
-
-/* ---------- Real social icons styling ---------- */
-.social-icon{
-  color:#fff;
-  border-color:#4A3528;
-  transition:background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
-}
-.social-icon:hover{
-  background:var(--accent-ochre);
-  color:var(--bg-dark);
-  border-color:var(--accent-ochre);
-  transform:translateY(-2px);
-}
-.social-icon svg{display:block;}
