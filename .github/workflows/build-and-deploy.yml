@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: '0 */12 * * *'   # check for new uploads twice daily
+    - cron: '0 */12 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -21,6 +21,9 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
+
+      - name: Install dependencies
+        run: npm install
 
       - name: Fetch latest YouTube videos (safe server-side step)
         env:
