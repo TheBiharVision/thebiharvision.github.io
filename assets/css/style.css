@@ -288,3 +288,32 @@ th{background:var(--bg-secondary);}
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+
+/* ---------- Header: subscribe button with icon ---------- */
+.header-actions .btn{
+  display:inline-flex;align-items:center;gap:.45rem;
+}
+.header-actions .btn svg{flex-shrink:0;}
+
+/* ---------- Sticky header scroll shadow ---------- */
+.site-header{
+  transition:box-shadow var(--transition), background var(--transition);
+}
+.site-header.scrolled{
+  box-shadow:0 2px 14px rgba(44,24,16,.1);
+  background:rgba(251,246,236,.98);
+}
+
+/* ---------- Real social icons styling ---------- */
+.social-icon{
+  color:#fff;
+  border-color:#4A3528;
+  transition:background var(--transition), color var(--transition), border-color var(--transition), transform var(--transition);
+}
+.social-icon:hover{
+  background:var(--accent-ochre);
+  color:var(--bg-dark);
+  border-color:var(--accent-ochre);
+  transform:translateY(-2px);
+}
+.social-icon svg{display:block;}
