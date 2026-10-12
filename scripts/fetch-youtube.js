@@ -4,17 +4,50 @@
  * Fetches latest uploads from the channel and merges them with manually-curated metadata
  * (host, guests, topics, chapters) stored in data/episodes-manual.json.
  * Falls back to leaving data/episodes.json untouched if the API key is missing or quota is exceeded.
+ *
+ * FIX: Hindi/Devanagari (and any non-Latin script) titles are now transliterated to
+ * Roman characters using any-ascii before slugifying, so slugs are never empty.
+ * A collision/empty safety net guarantees every episode gets a valid, unique slug.
  */
 const fs = require('fs');
 const path = require('path');
+const anyAscii = require('any-ascii');
 
 const API_KEY = process.env.YOUTUBE_API_KEY; // set via GitHub Secrets — never hardcode
 const CHANNEL_ID = 'UCq-dySuxc46S5BpDQuRGt_A';
 const DATA_PATH = path.join(__dirname, '../data/episodes.json');
 const MANUAL_PATH = path.join(__dirname, '../data/episodes-manual.json');
 
+/**
+ * Converts any title (English, Hindi, Bhojpuri/Devanagari, mixed) into a
+ * clean, URL-safe, lowercase slug. Non-Latin scripts are transliterated
+ * to approximate Roman characters first.
+ */
 function slugify(title) {
-  return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '').slice(0, 80);
+  const transliterated = anyAscii(title || '');
+  return transliterated
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '')
+    .slice(0, 70);
+}
+
+/**
+ * Ensures every episode gets a non-empty, unique slug.
+ * - If slugify() returns empty (e.g. title had no transliterable characters), fall back to "episode".
+ * - If the resulting slug collides with one already used in this batch, append a short video-ID suffix.
+ */
+function buildUniqueSlug(title, videoId, usedSlugs) {
+  let slug = slugify(title);
+  if (!slug) {
+    slug = 'episode';
+  }
+  if (usedSlugs.has(slug)) {
+    const suffix = videoId.replace(/[^a-zA-Z0-9]/g, '').slice(0, 6).toLowerCase();
+    slug = `${slug}-${suffix}`;
+  }
+  usedSlugs.add(slug);
+  return slug;
 }
 
 async function main() {
@@ -39,10 +72,12 @@ async function main() {
     const detailsJson = await detailsRes.json();
 
     const manual = fs.existsSync(MANUAL_PATH) ? JSON.parse(fs.readFileSync(MANUAL_PATH)) : {};
+    const usedSlugs = new Set();
 
     const episodes = detailsJson.items.map(video => {
-      const slug = slugify(video.snippet.title);
       const overrides = manual[video.id] || {};
+      const slug = overrides.slug || buildUniqueSlug(video.snippet.title, video.id, usedSlugs);
+
       return {
         id: video.id,
         slug,
@@ -62,7 +97,7 @@ async function main() {
         sources: overrides.sources || [],
         featured: overrides.featured || false,
         seoTitle: overrides.seoTitle || `${video.snippet.title} | The Bihar Vision`,
-        seoDescription: overrides.seoDescription || video.snippet.description.slice(0, 155)
+        seoDescription: overrides.seoDescription || (video.snippet.description || '').slice(0, 155)
       };
     });
 
