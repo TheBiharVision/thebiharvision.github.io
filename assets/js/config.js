@@ -28,7 +28,7 @@ window.SITE_CONFIG = {
     city: "New Delhi",
     region: "Delhi",
     country: "India",
-    note: "PLACEHOLDER: The Bihar Vision operates as an online media channel based in New Delhi, India. No public office or studio address is published."
+    note: "The Bihar Vision operates as an online media channel based in New Delhi, India. No public office or studio address is currently published."
   },
 
   languages: { primary: "Hindi / Bhojpuri", secondary: ["English"] },
