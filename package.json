@@ -1,0 +1,13 @@
+{
+  "name": "thebiharvision-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Build scripts for The Bihar Vision website (YouTube fetch + static page generation).",
+  "scripts": {
+    "fetch": "node scripts/fetch-youtube.js",
+    "generate": "node scripts/generate-pages.js"
+  },
+  "dependencies": {
+    "any-ascii": "^0.3.2"
+  }
+}
