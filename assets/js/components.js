@@ -3,7 +3,6 @@
   const cfg = window.SITE_CONFIG;
   if (!cfg) return;
 
-  /* ---------- Real brand SVG icons (single-color, inherits currentColor) ---------- */
   const ICONS = {
     youtube: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.44 3.5 12 3.5 12 3.5s-7.44 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.94.56 9.38.56 9.38.56s7.44 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/>
@@ -40,13 +39,11 @@
           <span>${cfg.siteName}</span>
         </a>
 
-        <!-- Desktop-only nav links -->
         <nav class="main-nav" aria-label="Primary">
           <ul style="display:flex;gap:1.75rem;">${navLinks}</ul>
         </nav>
 
         <div class="header-actions">
-          <!-- Desktop-only: search icon + subscribe button -->
           <div class="desktop-actions">
             <button class="icon-btn" id="search-toggle" aria-expanded="false" aria-controls="search-panel" aria-label="Open search">
               ${ICONS.search}
@@ -57,14 +54,12 @@
             </a>
           </div>
 
-          <!-- Mobile-only: hamburger (opens full menu with nav + search + subscribe inside) -->
           <button class="icon-btn menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="nav-overlay" aria-label="Open menu">
             ${ICONS.hamburger}
           </button>
         </div>
       </div>
 
-      <!-- Desktop search dropdown -->
       <div class="search-panel" id="search-panel">
         <form action="/search/" method="get" role="search">
           <label class="visually-hidden" for="header-search">Search episodes</label>
@@ -73,7 +68,6 @@
         </form>
       </div>
 
-      <!-- Mobile full-screen menu: nav links + search + subscribe all inside -->
       <div class="nav-overlay" id="nav-overlay">
         <div class="header-inner" style="padding:0;">
           <a class="brand" href="/">
@@ -104,7 +98,6 @@
       </div>
     `;
 
-    /* ---------- Desktop search dropdown toggle ---------- */
     const searchToggle = document.getElementById('search-toggle');
     const searchPanel = document.getElementById('search-panel');
     searchToggle.addEventListener('click', () => {
@@ -113,7 +106,6 @@
       if (open) document.getElementById('header-search').focus();
     });
 
-    /* ---------- Mobile full-screen menu toggle ---------- */
     const menuToggle = document.getElementById('menu-toggle');
     const navOverlay = document.getElementById('nav-overlay');
     const menuClose = document.getElementById('menu-close');
@@ -121,7 +113,7 @@
     menuToggle.addEventListener('click', () => {
       navOverlay.classList.add('open');
       menuToggle.setAttribute('aria-expanded', 'true');
-      document.body.style.overflow = 'hidden'; // prevent background scroll while menu open
+      document.body.style.overflow = 'hidden';
       const firstLink = navOverlay.querySelector('.mobile-nav a');
       if (firstLink) firstLink.focus();
     });
@@ -142,7 +134,6 @@
       }
     });
 
-    /* ---------- Sticky header scroll shadow ---------- */
     function onScroll() {
       if (window.scrollY > 8) {
         el.classList.add('scrolled');
@@ -162,7 +153,9 @@
     const legal = cfg.footerLinks.legal.map(i => `<a href="${i.href}">${i.label}</a>`).join('');
 
     el.innerHTML = `
-      <div class="footer-border-strip" role="presentation" aria-hidden="true"></div>
+      <div class="footer-border-strip">
+        <img src="/assets/img/bihar-vision-footer.png" alt="" role="presentation" loading="lazy">
+      </div>
       <div class="container">
         <div class="footer-grid">
           <div>
