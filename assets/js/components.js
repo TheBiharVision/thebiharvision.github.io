@@ -181,7 +181,7 @@
         </div>
         <div class="footer-bottom">
           <span>© ${year} ${cfg.siteName}. All rights reserved.</span>
-          <span>Developed & Maintained by <a href="${cfg.designCredit.url}" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;">${cfg.designCredit.name}</a></span>
+          <span>Designed by <a href="${cfg.designCredit.url}" target="_blank" rel="noopener" style="color:#fff;text-decoration:underline;">${cfg.designCredit.name}</a></span>
         </div>
       </div>
     `;
