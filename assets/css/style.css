@@ -1,7 +1,5 @@
 /* ============================================================
    THE BIHAR VISION — EARTHY / MITHILA-INSPIRED DESIGN SYSTEM
-   Palette inspired by traditional Mithila (Madhubani) painting:
-   terracotta, ochre/mustard, deep maroon, indigo accent, warm ivory base.
    ============================================================ */
 
 /* ---------- Tokens ---------- */
@@ -61,6 +59,13 @@ h1,h2,h3,h4{line-height:1.1;letter-spacing:-0.02em;margin:0 0 .5em;font-weight:7
 p{margin:0 0 1em;max-width:70ch;color:var(--text);}
 hr{border:none;border-top:1px solid var(--border);}
 
+/* Dark-section heading/text override — headings must stay white/light
+   inside any .dark section (hero, subscribe CTA, footer), otherwise the
+   global heading color (--text, dark brown) makes them invisible. */
+.dark h1,.dark h2,.dark h3,.dark h4{color:var(--text-dark);}
+.dark p, .dark .text-secondary{color:#D9C2B0;}
+.dark .eyebrow{color:var(--accent-ochre);}
+
 /* ---------- Focus & a11y ---------- */
 a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,[tabindex]:focus-visible{
   outline:3px solid var(--focus);
@@ -79,14 +84,12 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 section{padding:var(--gap-xl) 0;}
 .section-tight{padding:var(--gap-lg) 0;}
 .dark{background:var(--bg-dark);color:var(--text-dark);}
-.dark p, .dark .text-secondary{color:#D9C2B0;}
 .bg-secondary{background:var(--bg-secondary);}
 .divider{border-top:1px solid var(--border);}
 .text-secondary{color:var(--text-secondary);}
 .eyebrow{
   text-transform:uppercase;letter-spacing:.14em;font-size:.75rem;font-weight:700;color:var(--accent-maroon);
 }
-.dark .eyebrow{color:var(--accent-ochre);}
 .grid{display:grid;gap:var(--gap-md);}
 .grid-2{grid-template-columns:repeat(2,1fr);}
 .grid-3{grid-template-columns:repeat(3,1fr);}
@@ -110,12 +113,14 @@ section{padding:var(--gap-xl) 0;}
 .btn[disabled]{opacity:.5;cursor:not-allowed;}
 
 /* ---------- Header ---------- */
-.site-header{
+/* NOTE: ID selectors (#site-header) are used because the actual HTML element
+   is <header id="site-header">, not a class. Using .site-header would never match. */
+#site-header{
   position:sticky;top:0;z-index:100;background:rgba(251,246,236,.94);backdrop-filter:blur(8px);
   border-bottom:1px solid var(--border);
   transition:box-shadow var(--transition), background var(--transition);
 }
-.site-header.scrolled{
+#site-header.scrolled{
   box-shadow:0 2px 14px rgba(44,24,16,.1);
   background:rgba(251,246,236,.98);
 }
@@ -123,7 +128,6 @@ section{padding:var(--gap-xl) 0;}
 .brand{display:flex;align-items:center;gap:.65rem;font-weight:800;font-size:1.05rem;letter-spacing:-.01em;color:var(--text);}
 .brand img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
 
-/* Desktop nav links */
 .main-nav{display:flex;gap:1.75rem;}
 .main-nav a{font-weight:600;font-size:.92rem;padding:.25rem 0;border-bottom:2px solid transparent;color:var(--text);}
 .main-nav a:hover,.main-nav a[aria-current="page"]{border-color:var(--accent-terracotta);}
@@ -142,14 +146,13 @@ section{padding:var(--gap-xl) 0;}
 
 .menu-toggle{display:none;}
 
-/* ---------- MOBILE: hide desktop nav + desktop actions, show hamburger only ---------- */
 @media (max-width:860px){
   .main-nav{display:none;}
   .desktop-actions{display:none;}
   .menu-toggle{display:inline-flex;}
 }
 
-/* ---------- Mobile Nav Overlay (full-screen menu) ---------- */
+/* ---------- Mobile Nav Overlay ---------- */
 .nav-overlay{
   display:none;
   position:fixed;inset:0;
@@ -162,7 +165,6 @@ section{padding:var(--gap-xl) 0;}
 }
 .nav-overlay.open{display:flex;}
 
-/* Mobile nav links */
 .mobile-nav{margin-top:1.75rem;}
 .mobile-nav ul{display:flex;flex-direction:column;gap:.15rem;}
 .mobile-nav a{
@@ -171,7 +173,6 @@ section{padding:var(--gap-xl) 0;}
 }
 .mobile-nav a:hover,.mobile-nav a[aria-current="page"]{color:var(--accent-terracotta);}
 
-/* Mobile search (inside overlay) */
 .mobile-search{margin-top:1.75rem;}
 .mobile-search form{
   display:flex;align-items:center;gap:.5rem;
@@ -186,12 +187,10 @@ section{padding:var(--gap-xl) 0;}
   width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
 }
 
-/* Mobile subscribe button (inside overlay) */
 .mobile-subscribe-btn{
   margin-top:1.75rem;width:100%;justify-content:center;
 }
 
-/* Desktop search dropdown panel (unrelated to mobile overlay) */
 .search-panel{
   display:none;position:absolute;left:0;right:0;top:100%;background:var(--bg);border-bottom:1px solid var(--border);padding:1.25rem 1.5rem;
 }
@@ -281,18 +280,27 @@ section{padding:var(--gap-xl) 0;}
 .hp-field{position:absolute;left:-9999px;top:-9999px;}
 
 /* ---------- Footer ---------- */
-.site-footer{background:var(--bg-dark);color:#fff;padding:0 0 var(--gap-md);}
+/* NOTE: ID selector (#site-footer) because the HTML element is <footer id="site-footer">. */
+#site-footer{background:var(--bg-dark);color:#fff;padding:0 0 var(--gap-md);}
 
+/* Decorative skyline/border image strip — rendered as a real <img> tag
+   (added in components.js) so the illustration keeps its correct aspect
+   ratio instead of being stretched/cropped via a CSS background. */
 .footer-border-strip{
   width:100%;
-  height:48px;
-  background-image:url('/assets/img/mithila-border.png');
-  background-repeat:repeat-x;
-  background-position:center;
-  background-size:auto 100%;
+  background:var(--bg); /* matches page's ivory bg so a transparent PNG blends seamlessly */
+  line-height:0;
+}
+.footer-border-strip img{
+  width:100%;
+  height:auto;
+  max-height:160px;
+  object-fit:contain;
+  display:block;
+  margin:0 auto;
 }
 
-.site-footer .container{padding-top:var(--gap-xl);}
+#site-footer .container{padding-top:var(--gap-xl);}
 
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem;}
 .footer-grid h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;color:var(--accent-ochre);}
@@ -340,7 +348,7 @@ th{background:var(--bg-secondary);}
 .pagination button{border:1px solid var(--border);background:#fff;padding:.6rem 1rem;border-radius:var(--radius);color:var(--text);}
 .pagination button[aria-current="true"]{background:var(--accent-terracotta);color:#fff;border-color:var(--accent-terracotta);}
 
-/* Film grain (subtle, decorative, non-blocking) */
+/* Film grain */
 .grain::after{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
