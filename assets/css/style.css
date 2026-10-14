@@ -289,17 +289,24 @@ section{padding:var(--gap-xl) 0;}
 #site-footer{background:var(--bg-dark);color:#fff;padding:0 0 var(--gap-md);}
 
 .footer-border-strip{
-  width:100%;
-  background:var(--bg);
-  line-height:0;
+ width:100%;
+ background:transparent; /* (a) was var(--bg) — ab ye koi mismatched cream box nahi banayega */
+ line-height:0;
 }
 .footer-border-strip img{
-  width:100%;
-  height:auto;
-  max-height:160px;
-  object-fit:contain;
-  display:block;
-  margin:0 auto;
+ width:100%;
+ height:auto;
+ max-height:90px;        /* (b) was 160px — height reduced */
+ object-fit:contain;
+ display:block;
+ margin:0 auto;
+ mix-blend-mode:multiply; /* (a) PNG ke andar ka white box backdrop color me "ghul" jayega */
+}
+
+@media (max-width:600px){
+ .footer-border-strip img{
+   max-height:50px;       /* (b) mobile par aur bhi chhota */
+ }
 }
 
 #site-footer .container{padding-top:var(--gap-xl);}
