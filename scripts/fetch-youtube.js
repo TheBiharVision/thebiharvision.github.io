@@ -11,7 +11,8 @@
  */
 const fs = require('fs');
 const path = require('path');
-const anyAscii = require('any-ascii');
+const anyAsciiModule = require('any-ascii');
+const anyAscii = typeof anyAsciiModule === 'function' ? anyAsciiModule : anyAsciiModule.default;
 
 const API_KEY = process.env.YOUTUBE_API_KEY; // set via GitHub Secrets — never hardcode
 const CHANNEL_ID = 'UCq-dySuxc46S5BpDQuRGt_A';
