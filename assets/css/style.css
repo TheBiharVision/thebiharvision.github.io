@@ -138,6 +138,10 @@ section{padding:var(--gap-xl) 0;}
   width:40px;height:40px;display:inline-flex;align-items:center;justify-content:center;
   border:1px solid var(--border);border-radius:50%;background:transparent;color:var(--text);flex-shrink:0;
 }
+.icon-btn svg{
+ display:block;
+ margin:0 auto;
+}
 .icon-btn:hover{background:var(--bg-secondary);}
 
 .menu-toggle{display:none;}
@@ -290,26 +294,36 @@ section{padding:var(--gap-xl) 0;}
 
 .footer-border-strip{
  width:100%;
- background:transparent; /* (a) was var(--bg) — ab ye koi mismatched cream box nahi banayega */
+ background:var(--bg-secondary);
  line-height:0;
+ overflow:hidden;
 }
+
 .footer-border-strip img{
  width:100%;
  height:auto;
- max-height:90px;        /* (b) was 160px — height reduced */
- object-fit:contain;
+ aspect-ratio: 2560 / 423;
+ object-fit:cover;
  display:block;
  margin:0 auto;
- mix-blend-mode:multiply; /* (a) PNG ke andar ka white box backdrop color me "ghul" jayega */
+}
+
+@media (max-width:900px){
+ .footer-border-strip img{
+   aspect-ratio: 1600 / 423;
+ }
 }
 
 @media (max-width:600px){
  .footer-border-strip img{
-   max-height:50px;       /* (b) mobile par aur bhi chhota */
+   aspect-ratio: 900 / 340;
  }
 }
 
-#site-footer .container{padding-top:var(--gap-xl);}
+#site-footer .container{
+ padding-top: var(--gap-md); 
+}
+
 
 .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:2.5rem;}
 .footer-grid h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;color:var(--accent-ochre);}
