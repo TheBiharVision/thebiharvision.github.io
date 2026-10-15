@@ -107,6 +107,15 @@ section{padding:var(--gap-xl) 0;}
 .btn-outline:hover{background:var(--accent-terracotta);color:#fff;border-color:var(--accent-terracotta);}
 .dark .btn-outline{color:#fff;border-color:#6B4A3A;}
 .dark .btn-outline:hover{background:var(--accent-ochre);color:var(--bg-dark);border-color:var(--accent-ochre);}
+.hero .btn-outline{
+ color:#fff;
+ border-color:#6B4A3A;
+}
+.hero .btn-outline:hover{
+ background:var(--accent-ochre);
+ color:var(--bg-dark);
+ border-color:var(--accent-ochre);
+}
 .btn-sm{padding:.55rem 1.1rem;font-size:.85rem;}
 .btn[disabled]{opacity:.5;cursor:not-allowed;}
 
