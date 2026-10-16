@@ -108,19 +108,43 @@ episodesData.episodes.forEach(ep => {
   finalUrls.push(`/episodes/${slug}.html`);
 });
 
-// Regenerate sitemap.xml
-const staticUrls = [
-  '/', '/episodes/', '/about.html', '/team/ritesh-sharma.html', '/team/alok-prasad.html',
-  '/guests/', '/faq.html', '/contact.html', '/sitemap.html',
-  '/legal/privacy-policy.html', '/legal/terms-and-conditions.html', '/legal/disclaimer.html',
-  '/legal/cookie-policy.html', '/legal/copyright-policy.html', '/legal/editorial-policy.html', '/legal/accessibility.html'
+// Regenerate sitemap.xml (complete + SEO metadata: lastmod, changefreq, priority)
+const now = new Date().toISOString();
+
+const staticPages = [
+  { url: '/', priority: '1.0', changefreq: 'daily' },
+  { url: '/episodes/', priority: '0.9', changefreq: 'daily' },
+  { url: '/about.html', priority: '0.8', changefreq: 'monthly' },
+  { url: '/team/', priority: '0.7', changefreq: 'monthly' },
+  { url: '/team/ritesh-sharma.html', priority: '0.7', changefreq: 'monthly' },
+  { url: '/team/alok-prasad.html', priority: '0.7', changefreq: 'monthly' },
+  { url: '/guests/', priority: '0.6', changefreq: 'weekly' },
+  { url: '/faq.html', priority: '0.5', changefreq: 'monthly' },
+  { url: '/contact.html', priority: '0.6', changefreq: 'yearly' },
+  { url: '/sitemap.html', priority: '0.3', changefreq: 'monthly' },
+  { url: '/legal/', priority: '0.4', changefreq: 'monthly' },
+  { url: '/legal/privacy-policy.html', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal/terms-and-conditions.html', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal/disclaimer.html', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal/cookie-policy.html', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal/copyright-policy.html', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal/editorial-policy.html', priority: '0.3', changefreq: 'yearly' },
+  { url: '/legal/accessibility.html', priority: '0.3', changefreq: 'yearly' }
 ];
-const allUrls = [...staticUrls, ...finalUrls];
+
+const episodePages = finalUrls.map(u => ({ url: u, priority: '0.9', changefreq: 'monthly' }));
+
+const allPages = [...staticPages, ...episodePages];
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${allUrls.map(u => `  <url><loc>${SITE_URL}${u}</loc></url>`).join('\n')}
+${allPages.map(p => `  <url>
+    <loc>${SITE_URL}${p.url}</loc>
+    <lastmod>${now}</lastmod>
+    <changefreq>${p.changefreq}</changefreq>
+    <priority>${p.priority}</priority>
+  </url>`).join('\n')}
 </urlset>`;
 fs.writeFileSync(path.join(__dirname, '../sitemap.xml'), xml);
 
-console.log(`[generate-pages] Generated ${finalUrls.length} episode pages and sitemap.xml`);
+console.log(`[generate-pages] Generated ${finalUrls.length} episode pages and sitemap.xml with ${allPages.length} total URLs`);
