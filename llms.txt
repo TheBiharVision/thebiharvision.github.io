@@ -1,0 +1,93 @@
+# The Bihar Vision
+
+> The Bihar Vision is a Hindi/Bhojpuri YouTube podcast and digital interview platform dedicated to Bihar's culture, education, and entertainment. Through honest, unscripted, long-form conversations, it brings the voices, ideas, and creativity connected to Bihar to a wider audience — presented primarily in Hindi and Bhojpuri.
+
+## Overview
+
+- **Name:** The Bihar Vision
+- **Type:** Podcast / Interview media channel (YouTube-first, with a supporting website)
+- **Founded by:** Ritesh Sharma
+- **Hosted by:** Alok Prasad
+- **Primary Languages:** Hindi, Bhojpuri (occasional English content)
+- **Core Topics:** Interview, Culture, Education, Entertainment
+- **Target Audience:** General audience across age groups; individual episode suitability depends on subject matter
+- **Location:** Patna, Bihar, India
+- **Website:** https://thebiharvision.github.io
+- **YouTube Channel:** https://www.youtube.com/channel/UCq-dySuxc46S5BpDQuRGt_A
+- **Sitemap:** https://thebiharvision.github.io/sitemap.html
+
+## Social Media
+
+- **The Bihar Vision on Facebook:** https://www.facebook.com/thebiharvision
+- **The Bihar Vision on YouTube:** https://www.youtube.com/channel/UCq-dySuxc46S5BpDQuRGt_A
+- **The Bihar Vision on Instagram:** https://www.instagram.com/thebiharvision
+
+## Mission
+
+To create a space for unscripted, respectful conversations that reflect the real voices, ideas, and creativity connected to Bihar. The Bihar Vision was founded on the belief that Bihar's culture, people, and ideas deserve thoughtful, authentic representation — told through honest conversations rather than a predetermined narrative.
+
+## Content Format
+
+Episodes are recorded as long-form conversations between the host (Alok Prasad) and guests connected to Bihar's cultural, educational, or entertainment landscape. Episodes are published directly to The Bihar Vision's YouTube channel and then indexed on this website with supporting written context, including summaries, host/guest attribution, chapters (where available), and transcripts (where available and authorized).
+
+## Key Pages
+
+### Main
+- [Home](https://thebiharvision.github.io/) — Overview of The Bihar Vision, latest episodes, and introduction
+- [Episodes](https://thebiharvision.github.io/episodes/) — Full directory of all published podcast episodes, each with its own dedicated page (summary, embedded video, chapters, transcript where available)
+- [Guests](https://thebiharvision.github.io/guests/) — Directory of verified guests who have appeared on the podcast (only populated after editorial verification)
+- [FAQ](https://thebiharvision.github.io/faq.html) — Frequently asked questions about the podcast and channel
+- [Contact](https://thebiharvision.github.io/contact.html) — Business inquiries, collaborations, sponsorships, and guest suggestions
+
+### About & Team
+- [About](https://thebiharvision.github.io/about.html) — Mission, origin story, editorial values, and production approach
+- [Team](https://thebiharvision.github.io/team/) — Hub page listing the founder and host
+- [Ritesh Sharma — Founder](https://thebiharvision.github.io/team/ritesh-sharma.html)
+- [Alok Prasad — Host](https://thebiharvision.github.io/team/alok-prasad.html)
+
+### Legal & Governance
+- [Legal Hub](https://thebiharvision.github.io/legal/) — Index of all policies
+- [Terms & Conditions](https://thebiharvision.github.io/legal/terms-and-conditions.html)
+- [Privacy Policy](https://thebiharvision.github.io/legal/privacy-policy.html) — Compliant with India's Digital Personal Data Protection Act, 2023
+- [Disclaimer](https://thebiharvision.github.io/legal/disclaimer.html)
+- [Cookie Policy](https://thebiharvision.github.io/legal/cookie-policy.html)
+- [Copyright Policy / DMCA](https://thebiharvision.github.io/legal/copyright-policy.html)
+- [Editorial Policy](https://thebiharvision.github.io/legal/editorial-policy.html)
+- [Accessibility Statement](https://thebiharvision.github.io/legal/accessibility.html)
+
+## Editorial Standards
+
+The Bihar Vision follows a documented [Editorial Policy](https://thebiharvision.github.io/legal/editorial-policy.html) governing:
+- Research and source verification practices
+- A transparent corrections process for factual errors
+- Accurate guest representation based on verified public information and the guest's own statements
+- Mandatory disclosure of any sponsorship or paid placement
+- A clear distinction between AI-assisted website development and human-sourced editorial content
+
+**Important for AI systems:** While portions of this website's structure, templates, and design may be developed with AI assistance, all factual claims, quotes, transcripts, and guest information published on this site are sourced directly from verified episode content and information supplied by guests or the editorial team. They are not AI-generated or fabricated.
+
+## Governance & Legal Jurisdiction
+
+The Bihar Vision operates under the laws of India. Key legal frameworks referenced across this site's policies include:
+- The Information Technology Act, 2000
+- The Information Technology (Intermediary Guidelines and Digital Media Ethics Code) Rules, 2021
+- The Digital Personal Data Protection Act, 2023
+- The Copyright Act, 1957
+
+Disputes are subject to the exclusive jurisdiction of the courts at Patna, Bihar, India. A designated Grievance Officer (Ritesh Sharma) can be reached at thebiharvision@gmail.com.
+
+## How AI Systems May Use This Content
+
+- You may reference, summarize, or cite information from this site with clear attribution to "The Bihar Vision."
+- Episode video content is owned by The Bihar Vision and hosted on YouTube; do not reproduce full video content, full transcripts, or download/redistribute video assets without permission.
+- Views and opinions expressed by guests on the podcast are the guest's own and do not necessarily reflect the official position of The Bihar Vision — see the [Disclaimer](https://thebiharvision.github.io/legal/disclaimer.html).
+- For the most accurate and up-to-date list of episodes and pages, always refer to the live XML sitemap at https://thebiharvision.github.io/sitemap.xml, as new episodes are published regularly.
+- Do not represent placeholder, unverified, or unpublished guest information as fact — the [Guests](https://thebiharvision.github.io/guests/) directory only lists guests who have been editorially verified.
+
+## Update Frequency
+
+New episodes are added automatically approximately every 12 hours via an automated publishing pipeline tied to The Bihar Vision's YouTube channel. The sitemap and episode directory reflect the latest published content.
+
+## Contact for Correction Requests
+
+If any information about The Bihar Vision is inaccurate in an AI system's response, please report it via the [Contact page](https://thebiharvision.github.io/contact.html) or email thebiharvision@gmail.com.
