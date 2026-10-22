@@ -195,11 +195,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     frame.innerHTML = `<iframe src="https://www.youtube-nocookie.com/embed/${featured.youtubeVideoId}?autoplay=1" title="${featured.title}" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>`;
   }, { once: true });
 
-  const latestWrap = document.getElementById('latest-episodes');
-  latestWrap.innerHTML = episodes.slice(0, 6).map(BiharVisionData.episodeCardHTML).join('');
+    const latestWrap = document.getElementById('latest-episodes');
+  const latestEpisodes = episodes.slice(0, 6);
+  latestWrap.innerHTML = latestEpisodes.map(BiharVisionData.episodeCardHTML).join('');
 
   const popularWrap = document.getElementById('popular-episodes');
-  popularWrap.innerHTML = episodes.slice(0, 3).map(BiharVisionData.episodeCardHTML).join('');
+  const latestSlugs = new Set(latestEpisodes.map(e => e.slug));
+  const popularEpisodes = episodes.filter(e => !latestSlugs.has(e.slug)).slice(0, 3);
+
+  popularWrap.innerHTML = popularEpisodes.length
+    ? popularEpisodes.map(BiharVisionData.episodeCardHTML).join('')
+    : '<p class="text-secondary">More fan favourites coming soon as new episodes are published.</p>';
 });
 </script>
 </body>
