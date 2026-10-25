@@ -43,7 +43,7 @@ window.SITE_CONFIG = {
 
   designCredit: {
     name: "Sharmaji Technology Media",
-    url: "https://gitesh-sharma.github.io/en/org/index.html" 
+    url: "https://gitesh-sharma.github.io/en/org/index.html"
   },
 
   // Set to true + provide a form endpoint (e.g. Formspree/Getform ID) to enable live submission.
@@ -91,4 +91,5 @@ window.SITE_CONFIG = {
       { label: "Accessibility", href: "/legal/accessibility.html" }
     ],
     sitemap: { html: "/sitemap.html", xml: "/sitemap.xml" }
-  };
+  }
+};
