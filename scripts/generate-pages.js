@@ -25,6 +25,15 @@ function ensureValidSlug(ep) {
   return fallback;
 }
 
+function hostProfileLink(hostName) {
+  const knownHosts = {
+    'Alok Prasad': '/team/alok-prasad.html',
+    'Ritesh Sharma': '/team/ritesh-sharma.html'
+  };
+  const url = knownHosts[hostName];
+  return url ? `<a href="${url}">${hostName}</a>` : hostName;
+}
+
 function episodePageTemplate(ep, slug) {
   const chaptersHtml = ep.chapters?.length
     ? `<ul>${ep.chapters.map(c => `<li>${c.time} — ${c.label}</li>`).join('')}</ul>`
@@ -73,7 +82,7 @@ ${JSON.stringify({
   <article class="container" style="max-width:860px;">
     <p class="eyebrow">${(ep.topics || []).join(' · ') || 'Episode'}</p>
     <h1>${ep.title}</h1>
-    <p class="text-secondary">Published ${ep.publishedAt}${ep.durationDisplay ? ' · ' + ep.durationDisplay : ''} · Hosted by ${ep.host}</p>
+    <p class="text-secondary">Published ${ep.publishedAt}${ep.durationDisplay ? ' · ' + ep.durationDisplay : ''} · Hosted by ${hostProfileLink(ep.host)}</p>
     <div class="video-frame" style="margin:1.5rem 0;">
       <iframe src="https://www.youtube-nocookie.com/embed/${ep.youtubeVideoId}" title="${ep.title} | The Bihar Vision" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
