@@ -150,6 +150,7 @@
     if (!el) return;
     const year = new Date().getFullYear();
     const explore = cfg.footerLinks.explore.map(i => `<a href="${i.href}">${i.label}</a>`).join('');
+    const about = cfg.footerLinks.about.map(i => `<a href="${i.href}">${i.label}</a>`).join('');
     const legal = cfg.footerLinks.legal.map(i => `<a href="${i.href}">${i.label}</a>`).join('');
 
     el.innerHTML = `
@@ -171,16 +172,12 @@
             </div>
           </div>
           <div><h3>Explore</h3>${explore}</div>
+          <div><h3>About</h3>${about}</div>
           <div><h3>Legal</h3>${legal}</div>
-          <div>
-            <h3>Resources</h3>
-            <a href="${cfg.footerLinks.sitemap.html}">HTML Sitemap</a>
-            <a href="${cfg.footerLinks.sitemap.xml}">XML Sitemap</a>
-            <a href="mailto:${cfg.email}">${cfg.email}</a>
-          </div>
         </div>
-        <div class="footer-bottom">
+        <div class="footer-bottom" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;">
           <span>© ${year} ${cfg.siteName}. All rights reserved.</span>
+          <span><a href="/faq.html" style="color:#D9C2B0;">FAQ</a> &middot; <a href="${cfg.footerLinks.sitemap.html}" style="color:#D9C2B0;">Sitemap</a></span>
           <span>Designed by <a href="${cfg.designCredit.url}" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;">${cfg.designCredit.name}</a></span>
         </div>
       </div>
