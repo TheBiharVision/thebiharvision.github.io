@@ -408,7 +408,8 @@ section{padding:var(--gap-xl) 0;}
 
 /* ---------- Breadcrumb ---------- */
 .breadcrumb{font-size:.82rem;color:var(--text-secondary);padding:1rem 0;}
-.breadcrumb a{text-decoration:underline;color:var(--accent-terracotta);}
+.breadcrumb a{text-decoration:none;color:var(--accent-terracotta);}
+.breadcrumb a:hover{text-decoration:underline;}
 
 /* ---------- Table ---------- */
 table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
