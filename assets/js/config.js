@@ -85,10 +85,7 @@ window.SITE_CONFIG = {
       { label: "Privacy Policy", href: "/legal/privacy-policy.html" },
       { label: "Terms & Conditions", href: "/legal/terms-and-conditions.html" },
       { label: "Disclaimer", href: "/legal/disclaimer.html" },
-      { label: "Cookie Policy", href: "/legal/cookie-policy.html" },
-      { label: "Copyright / DMCA", href: "/legal/copyright-policy.html" },
-      { label: "Editorial Policy", href: "/legal/editorial-policy.html" },
-      { label: "Accessibility", href: "/legal/accessibility.html" }
+      { label: "Copyright / DMCA", href: "/legal/copyright-policy.html" }
     ],
     sitemap: { html: "/sitemap.html", xml: "/sitemap.xml" }
   }
