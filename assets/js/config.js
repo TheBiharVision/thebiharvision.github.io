@@ -72,11 +72,14 @@ window.SITE_CONFIG = {
     explore: [
       { label: "Home", href: "/" },
       { label: "Episodes", href: "/episodes/" },
-      { label: "About Us", href: "/about.html" },
-      { label: "Team", href: "/team/ritesh-sharma.html" },
       { label: "Guests", href: "/guests/" },
-      { label: "FAQ", href: "/faq.html" },
       { label: "Contact Us", href: "/contact.html" }
+    ],
+    about: [
+      { label: "About Bihar Vision", href: "/about.html" },
+      { label: "About Team", href: "/team/" },
+      { label: "Ritesh Sharma", href: "/team/ritesh-sharma.html" },
+      { label: "Alok Prasad", href: "/team/alok-prasad.html" }
     ],
     legal: [
       { label: "Privacy Policy", href: "/legal/privacy-policy.html" },
@@ -88,5 +91,4 @@ window.SITE_CONFIG = {
       { label: "Accessibility", href: "/legal/accessibility.html" }
     ],
     sitemap: { html: "/sitemap.html", xml: "/sitemap.xml" }
-  }
-};
+  };
