@@ -175,7 +175,8 @@
           <div><h3>About</h3>${about}</div>
           <div><h3>Legal</h3>${legal}</div>
         </div>
-        <div class="footer-bottom" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;">
+        <!-- <div class="footer-bottom" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;"> -->
+        <div class="footer-bottom">
           <span>© ${year} ${cfg.siteName}. All rights reserved.</span>
           <span><a href="/faq.html" style="color:#D9C2B0;">FAQ</a> &middot; <a href="${cfg.footerLinks.sitemap.html}" style="color:#D9C2B0;">Sitemap</a></span>
           <span>Designed by <a href="${cfg.designCredit.url}" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;">${cfg.designCredit.name}</a></span>
