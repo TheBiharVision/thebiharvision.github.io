@@ -6,7 +6,7 @@ window.SITE_CONFIG = {
   siteName: "The Bihar Vision",
   siteShortName: "Bihar Vision",
   siteUrl: "https://thebiharvision.github.io",
-  tagline: "The Bihar Vision is one of the fastest-growing entertainment podcast channels dedicated to Bhojpuri cinema, music, and culture. It features exclusive, deep-dive interviews and conversations with leading regional celebrities, creators, and public figures.",
+  tagline: "The Bihar Vision is one of the fastest-growing entertainment podcast channels dedicated to Bhojpuri cinema, music, and culture.",
   description: "The Bihar Vision is a Hindi/Bhojpuri YouTube podcast featuring interviews and conversations on culture, education, and entertainment, hosted by Alok Prasad and founded by Ritesh Sharma.",
   logo: "/assets/img/the-bihar-vision-logo-full.png",
 
