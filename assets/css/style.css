@@ -335,27 +335,6 @@ section{padding:var(--gap-xl) 0;}
 .footer-grid h3{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem;color:var(--accent-ochre);}
 .footer-grid a{color:#D9C2B0;display:block;padding:.3rem 0;font-size:.92rem;}
 .footer-grid a:hover{color:#fff;}
-/* .footer-bottom{
- margin-top:3rem;
- padding-top:1.5rem;
- border-top:1px solid #4A3528;   
- display:flex;
- flex-wrap:wrap;
- justify-content:space-between;
- gap:1rem;
- font-size:.82rem;
- color:#C9B8A8;
-}
-
-@media (max-width:600px){
- .footer-bottom{                 
-   flex-direction:column;
-   align-items:center;
-   text-align:center;
-   gap:.5rem;
- }
-} */
-
 .footer-bottom{
  margin-top:3rem;
  padding-top:1.5rem;
@@ -369,24 +348,26 @@ section{padding:var(--gap-xl) 0;}
  color:#C9B8A8;
 }
 
+.footer-break{display:none;}
+
 @media (max-width:600px){
  .footer-bottom{
-   flex-direction:row;
-   flex-wrap:wrap;
-   justify-content:center;
-   align-items:center;
+   display:block;
    text-align:center;
-   gap:.4rem .3rem;
+   font-size:.74rem;
+   line-height:1.6;
  }
- .footer-bottom > span:nth-child(2)::before{
-   content:"• ";
+ .footer-bottom span{
+   display:inline;
  }
- .footer-bottom > span:last-child{
-   flex-basis:100%;
-   margin-top:.3rem;
+ .footer-faq-sitemap::before{
+   content:" • ";
+ }
+ .footer-break{
+   display:block;
+   margin-top:.4rem;
  }
 }
-
 
 /* Social icon row — centered by default everywhere it's used
    (footer brand column AND the homepage Subscribe CTA section) */
