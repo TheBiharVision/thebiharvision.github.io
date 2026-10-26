@@ -354,11 +354,14 @@ section{padding:var(--gap-xl) 0;}
  .footer-bottom{
    display:block;
    text-align:center;
-   font-size:.74rem;
+   font-size:.66rem;
    line-height:1.6;
+   padding-left:.5rem;
+   padding-right:.5rem;
  }
  .footer-bottom span{
    display:inline;
+   white-space:nowrap;
  }
  .footer-faq-sitemap::before{
    content:" • ";
@@ -366,6 +369,12 @@ section{padding:var(--gap-xl) 0;}
  .footer-break{
    display:block;
    margin-top:.4rem;
+ }
+}
+
+@media (max-width:360px){
+ .footer-bottom{
+   font-size:.6rem;
  }
 }
 
