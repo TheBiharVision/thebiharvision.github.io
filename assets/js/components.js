@@ -164,7 +164,7 @@
               <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
               <span>${cfg.siteName}</span>
             </div>
-            <p style="color:#D9C2B0;max-width:32ch;">${cfg.tagline}</p>
+            <p style="color:#D9C2B0;max-width:34ch;">${cfg.tagline} <a href="/about.html" style="color:var(--accent-ochre);font-weight:700;font-size:.85rem;white-space:nowrap;">Read more →</a></p>
             <div class="social-row">
               <a class="icon-btn social-icon" href="${cfg.youtube.channelUrl}" target="_blank" rel="noopener" aria-label="${cfg.siteName} on YouTube">${ICONS.youtube}</a>
               <a class="icon-btn social-icon" href="${cfg.social.instagram}" target="_blank" rel="noopener" aria-label="${cfg.siteName} on Instagram">${ICONS.instagram}</a>
