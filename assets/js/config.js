@@ -49,7 +49,7 @@ window.SITE_CONFIG = {
   // Set to true + provide a form endpoint (e.g. Formspree/Getform ID) to enable live submission.
   // NEVER put secret keys here — only public form endpoint IDs are safe client-side.
   contactForm: {
-    provider: "mailto:thebiharvision@gmail.com", // "formspree" | "mailto"
+    provider: "mailto", // "formspree" | "mailto"
     endpoint: "" // e.g. "https://formspree.io/f/XXXXXXX" — PLACEHOLDER, not yet configured
   },
 
