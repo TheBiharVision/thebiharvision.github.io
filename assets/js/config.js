@@ -25,10 +25,10 @@ window.SITE_CONFIG = {
   email: "thebiharvision@gmail.com",
 
   location: {
-    city: "New Delhi",
-    region: "Delhi",
+    city: "Noida",
+    region: "Uttar Pradesh",
     country: "India",
-    note: "The Bihar Vision operates as an online media channel based in New Delhi, India. No public office or studio address is currently published."
+    note: "The Bihar Vision operates as an online media channel based in Noida, Uttar Pradesh, India."
   },
 
   languages: { primary: "Hindi / Bhojpuri", secondary: ["English"] },
@@ -49,7 +49,7 @@ window.SITE_CONFIG = {
   // Set to true + provide a form endpoint (e.g. Formspree/Getform ID) to enable live submission.
   // NEVER put secret keys here — only public form endpoint IDs are safe client-side.
   contactForm: {
-    provider: "mailto", // "formspree" | "mailto"
+    provider: "mailto:thebiharvision@gmail.com", // "formspree" | "mailto"
     endpoint: "" // e.g. "https://formspree.io/f/XXXXXXX" — PLACEHOLDER, not yet configured
   },
 
@@ -62,9 +62,8 @@ window.SITE_CONFIG = {
     { label: "Home", href: "/" },
     { label: "Episodes", href: "/episodes/" },
     { label: "About", href: "/about.html" },
-    { label: "Team", href: "/team/ritesh-sharma.html" },
-    { label: "Guests", href: "/guests/" },
-    { label: "FAQ", href: "/faq.html" },
+    { label: "Team", href: "/team/index.html" },
+    { label: "FAQs", href: "/faq.html" },
     { label: "Contact", href: "/contact.html" }
   ],
 
