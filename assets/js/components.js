@@ -180,7 +180,7 @@
           <span>© ${year} ${cfg.siteName}. All rights reserved.</span>
           <span class="footer-faq-sitemap"><a href="/faq.html" style="color:#D9C2B0;">FAQs</a> &middot; <a href="${cfg.footerLinks.sitemap.html}" style="color:#D9C2B0;">Sitemap</a></span>
           <br class="footer-break">
-          <span>Designed by <a href="${cfg.designCredit.url}" target="_blank" rel="noopener" style="color:#fff;text-decoration:none;">${cfg.designCredit.name}</a></span>
+          <span>Designed by <a href="${cfg.designCredit.url}" target="_blank" rel="noopener" style="color:#D9C2B0;text-decoration:none;">${cfg.designCredit.name}</a></span>
         </div>
       </div>
     `;
