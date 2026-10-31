@@ -3,8 +3,8 @@
   const cfg = window.SITE_CONFIG;
   if (!cfg) return;
 
-  function brandNameHTML() {
-    return `<span class="brand-name"><span class="font-the">The</span> <span class="font-bihar">Bihar</span> <span class="font-vision">Vision</span></span>`;
+    function brandNameHTML() {
+    return `<span class="brand-name"><span class="font-bihar-bold">THE BIHAR</span> <span class="font-vision-light">VISION</span></span>`;
   }
 
   const ICONS = {
