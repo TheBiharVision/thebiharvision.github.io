@@ -457,7 +457,7 @@ th{background:var(--bg-secondary);}
 /* Brand Name */
 .brand-name .font-the{
   font-family:'Fraunces',serif;
-  font-weight:400;
+  font-weight:500;
 }
 .brand-name .font-bihar{
   font-family:'Fraunces',serif;
@@ -465,5 +465,5 @@ th{background:var(--bg-secondary);}
 }
 .brand-name .font-vision{
   font-family:'Fraunces',serif;
-  font-weight:500;
+  font-weight:300;
 }
