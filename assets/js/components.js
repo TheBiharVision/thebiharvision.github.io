@@ -3,6 +3,10 @@
   const cfg = window.SITE_CONFIG;
   if (!cfg) return;
 
+  function brandNameHTML() {
+    return `<span class="brand-name"><span class="font-the">The</span> <span class="font-bihar">Bihar</span> <span class="font-vision">Vision</span></span>`;
+  }
+
   const ICONS = {
     youtube: `<svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M23.5 6.2a3.02 3.02 0 0 0-2.12-2.14C19.44 3.5 12 3.5 12 3.5s-7.44 0-9.38.56A3.02 3.02 0 0 0 .5 6.2 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.8 3.02 3.02 0 0 0 2.12 2.14c1.94.56 9.38.56 9.38.56s7.44 0 9.38-.56a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.8ZM9.6 15.6V8.4L15.8 12Z"/>
@@ -36,7 +40,7 @@
       <div class="header-inner">
         <a class="brand" href="/" aria-label="${cfg.siteName} home">
           <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
-          <span>${cfg.siteName}</span>
+          ${brandNameHTML()}
         </a>
 
         <nav class="main-nav" aria-label="Primary">
@@ -72,7 +76,7 @@
         <div class="header-inner" style="padding:0;">
           <a class="brand" href="/">
             <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
-            <span>${cfg.siteName}</span>
+            ${brandNameHTML()}
           </a>
           <button class="icon-btn" id="menu-close" aria-label="Close menu">
             ${ICONS.close}
@@ -162,7 +166,7 @@
           <div>
             <div class="brand" style="color:#fff;margin-bottom:.75rem;">
               <img src="${cfg.logo}" alt="${cfg.siteName} logo" width="36" height="36">
-              <span>${cfg.siteName}</span>
+              ${brandNameHTML()}
             </div>
             <p style="color:#D9C2B0;max-width:34ch;">${cfg.tagline} <a href="/about.html" style="color:var(--accent-ochre);font-weight:700;font-size:.85rem;white-space:nowrap;">Read more →</a></p>
             <div class="social-row">
@@ -175,7 +179,6 @@
           <div><h3>About</h3>${about}</div>
           <div><h3>Legal</h3>${legal}</div>
         </div>
-        <!-- <div class="footer-bottom" style="display:flex;flex-wrap:wrap;gap:1rem;justify-content:space-between;align-items:center;"> -->
         <div class="footer-bottom">
           <span>© ${year} ${cfg.siteName}. All rights reserved.</span>
           <span class="footer-faq-sitemap"><a href="/faq.html" style="color:#D9C2B0;">FAQs</a> &middot; <a href="${cfg.footerLinks.sitemap.html}" style="color:#D9C2B0;">Sitemap</a></span>
