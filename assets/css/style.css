@@ -2,9 +2,10 @@
    THE BIHAR VISION — EARTHY / MITHILA-INSPIRED DESIGN SYSTEM
    ============================================================ */
 
-/* ---------- Tokens ---------- */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Fraunces:ital,wght@0,600;0,700&family=Dancing+Script:wght@700&display=swap');
+/* ----- Brand Font ----- */
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@300;700&display=swap');
 
+/* ---------- Tokens ---------- */
 :root{
   --bg:#FBF6EC;
   --bg-secondary:#F2E6D0;
@@ -454,16 +455,11 @@ th{background:var(--bg-secondary);}
 }
 
 /* Brand Name */
-.brand-name .font-the{
-  font-family:'Poppins',sans-serif;
-  font-weight:600;
-}
-.brand-name .font-bihar{
+.brand-name .font-bihar-bold{
   font-family:'Fraunces',serif;
   font-weight:700;
 }
-.brand-name .font-vision{
-  font-family:'Dancing Script',cursive;
-  font-weight:700;
-  font-size:1.1em;
+.brand-name .font-vision-light{
+  font-family:'Fraunces',serif;
+  font-weight:300;
 }
