@@ -3,7 +3,7 @@
    ============================================================ */
 
 /* ----- Brand Font ----- */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@300;400;500;550;700&display=swap');
 
 /* ---------- Tokens ---------- */
 :root{
@@ -457,7 +457,7 @@ th{background:var(--bg-secondary);}
 /* Brand Name */
 .brand-name .font-the{
   font-family:'Fraunces',serif;
-  font-weight:500;
+  font-weight:550;
 }
 .brand-name .font-bihar{
   font-family:'Fraunces',serif;
