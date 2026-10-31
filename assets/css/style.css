@@ -3,6 +3,8 @@
    ============================================================ */
 
 /* ---------- Tokens ---------- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Fraunces:ital,wght@0,600;0,700&family=Dancing+Script:wght@700&display=swap');
+
 :root{
   --bg:#FBF6EC;
   --bg-secondary:#F2E6D0;
@@ -449,4 +451,19 @@ th{background:var(--bg-secondary);}
 .grain::after{
   content:"";position:absolute;inset:0;pointer-events:none;opacity:.035;mix-blend-mode:overlay;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Brand Name */
+.brand-name .font-the{
+  font-family:'Poppins',sans-serif;
+  font-weight:600;
+}
+.brand-name .font-bihar{
+  font-family:'Fraunces',serif;
+  font-weight:700;
+}
+.brand-name .font-vision{
+  font-family:'Dancing Script',cursive;
+  font-weight:700;
+  font-size:1.1em;
 }
