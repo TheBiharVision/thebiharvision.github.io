@@ -18,10 +18,76 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"CollectionPage",
-  "name":"Our Team — The Bihar Vision",
-  "url":"https://thebiharvision.github.io/team/",
-  "isPartOf":{"@type":"WebSite","name":"The Bihar Vision","url":"https://thebiharvision.github.io"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://thebiharvision.github.io/team/#webpage",
+      "url": "https://thebiharvision.github.io/team/",
+      "name": "Our Team — The Bihar Vision",
+      "description": "Meet the founder and host behind The Bihar Vision, a Hindi/Bhojpuri YouTube podcast based in Noida, India.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://thebiharvision.github.io/#website"
+      },
+      "about": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      },
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "item": {
+              "@type": "Person",
+              "@id": "https://thebiharvision.github.io/team/ritesh-sharma.html#person",
+              "name": "Ritesh Sharma",
+              "url": "https://thebiharvision.github.io/team/ritesh-sharma.html",
+              "jobTitle": "Founder",
+              "worksFor": {
+                "@id": "https://thebiharvision.github.io/#organization"
+              }
+            }
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "item": {
+              "@type": "Person",
+              "@id": "https://thebiharvision.github.io/team/alok-prasad.html#person",
+              "name": "Alok Prasad",
+              "url": "https://thebiharvision.github.io/team/alok-prasad.html",
+              "jobTitle": "Host",
+              "worksFor": {
+                "@id": "https://thebiharvision.github.io/#organization"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://thebiharvision.github.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Team",
+      "item": "https://thebiharvision.github.io/team/"
+    }
+  ]
 }
 </script>
 <style>
