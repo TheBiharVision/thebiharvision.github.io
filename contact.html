@@ -14,10 +14,46 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"ContactPage",
-  "name":"Contact The Bihar Vision",
-  "url":"https://thebiharvision.github.io/contact.html",
-  "mainEntity":{"@type":"Organization","name":"The Bihar Vision","email":"thebiharvision@gmail.com"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ContactPage",
+      "@id": "https://thebiharvision.github.io/contact.html#webpage",
+      "url": "https://thebiharvision.github.io/contact.html",
+      "name": "Contact Us — The Bihar Vision",
+      "description": "Contact The Bihar Vision for guest suggestions, interview requests, and partnership inquiries.",
+      "inLanguage": "en",
+      "isPartOf": {
+        "@id": "https://thebiharvision.github.io/#website"
+      },
+      "about": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      }
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://thebiharvision.github.io/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Contact",
+      "item": "https://thebiharvision.github.io/contact.html"
+    }
+  ]
 }
 </script>
 </head>
