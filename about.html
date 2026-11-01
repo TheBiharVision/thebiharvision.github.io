@@ -17,10 +17,59 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org","@type":"AboutPage",
-  "name":"About The Bihar Vision",
-  "url":"https://thebiharvision.github.io/about.html",
-  "mainEntity":{"@type":"Organization","name":"The Bihar Vision","url":"https://thebiharvision.github.io"}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thebiharvision.github.io/#organization",
+      "name": "The Bihar Vision",
+      "alternateName": "Bihar Vision",
+      "url": "https://thebiharvision.github.io/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://thebiharvision.github.io/assets/img/the-bihar-vision-logo-full.webp"
+      },
+      "description": "The Bihar Vision is a Hindi/Bhojpuri YouTube podcast featuring interviews and conversations on culture, education, and entertainment.",
+      "founder": {
+        "@type": "Person",
+        "name": "Ritesh Sharma",
+        "url": "https://thebiharvision.github.io/team/ritesh-sharma.html",
+        "sameAs": [
+          "https://www.instagram.com/riteshsharma.yt/",
+          "https://www.facebook.com/riteshsharma.yt"
+        ]
+      },
+      "email": "thebiharvision@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Noida",
+        "addressRegion": "Uttar Pradesh",
+        "addressCountry": "IN"
+      },
+      "sameAs": [
+        "https://www.youtube.com/channel/UCq-dySuxc46S5BpDQuRGt_A",
+        "https://www.instagram.com/thebiharvision",
+        "https://www.facebook.com/thebiharvision"
+      ]
+    },
+    {
+      "@type": "AboutPage",
+      "@id": "https://thebiharvision.github.io/about.html#webpage",
+      "url": "https://thebiharvision.github.io/about.html",
+      "name": "About The Bihar Vision",
+      "description": "Jaaniye The Bihar Vision ki kahani, mission aur kaam ke baare me. Noida se chalne wala Hindi/Bhojpuri YouTube podcast.",
+      "isPartOf": {
+        "@id": "https://thebiharvision.github.io/#website"
+      },
+      "about": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      },
+      "mainEntity": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      },
+      "inLanguage": "hi"
+    }
+  ]
 }
 </script>
 </head>
