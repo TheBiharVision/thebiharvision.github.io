@@ -21,29 +21,132 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "The Bihar Vision",
-  "url": "https://thebiharvision.github.io",
-  "logo": "https://yt3.googleusercontent.com/AP6H5C_wCpt12OHrWK462FPNC7hil_35pnCHDnADD7OSGvSu-sKJUEl-eS_lNP2LIBMRlcso=s160-c-k-c0x00ffffff-no-rj",
-  "email": "thebiharvision@gmail.com",
-  "sameAs": [
-    "https://www.youtube.com/channel/UCq-dySuxc46S5BpDQuRGt_A",
-    "https://www.instagram.com/thebiharvision",
-    "https://www.facebook.com/thebiharvision"
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://thebiharvision.github.io/#organization",
+      "name": "The Bihar Vision",
+      "alternateName": "Bihar Vision",
+      "url": "https://thebiharvision.github.io/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://thebiharvision.github.io/assets/img/the-bihar-vision-logo-full.webp"
+      },
+      "description": "The Bihar Vision is a Hindi/Bhojpuri YouTube podcast featuring interviews and conversations on culture, education, and entertainment, hosted by Alok Prasad and founded by Ritesh Sharma.",
+      "email": "thebiharvision@gmail.com",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Noida",
+        "addressRegion": "Uttar Pradesh",
+        "addressCountry": "IN"
+      },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "thebiharvision@gmail.com",
+        "availableLanguage": ["Hindi", "English"],
+        "areaServed": "IN"
+      },
+      "founder": {
+        "@type": "Person",
+        "@id": "https://thebiharvision.github.io/team/ritesh-sharma.html#person",
+        "name": "Ritesh Sharma",
+        "jobTitle": "Founder",
+        "url": "https://thebiharvision.github.io/team/ritesh-sharma.html",
+        "sameAs": [
+          "https://www.instagram.com/riteshsharma.yt/",
+          "https://www.facebook.com/riteshsharma.yt"
+        ]
+      },
+      "member": {
+        "@type": "Person",
+        "@id": "https://thebiharvision.github.io/team/alok-prasad.html#person",
+        "name": "Alok Prasad",
+        "jobTitle": "Host",
+        "url": "https://thebiharvision.github.io/team/alok-prasad.html"
+      },
+      "sameAs": [
+        "https://www.youtube.com/channel/UCq-dySuxc46S5BpDQuRGt_A",
+        "https://www.instagram.com/thebiharvision",
+        "https://www.facebook.com/thebiharvision"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://thebiharvision.github.io/#website",
+      "url": "https://thebiharvision.github.io/",
+      "name": "The Bihar Vision",
+      "description": "A Hindi/Bhojpuri podcast on culture, education, and entertainment.",
+      "inLanguage": "hi",
+      "publisher": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://thebiharvision.github.io/search/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://thebiharvision.github.io/#webpage",
+      "url": "https://thebiharvision.github.io/",
+      "name": "The Bihar Vision - Hindi & Bhojpuri Podcast",
+      "description": "The homepage of The Bihar Vision, a Hindi/Bhojpuri podcast with honest conversations on culture, education, and entertainment, hosted by Alok Prasad.",
+      "inLanguage": "hi",
+      "isPartOf": {
+        "@id": "https://thebiharvision.github.io/#website"
+      },
+      "about": {
+        "@id": "https://thebiharvision.github.io/#organization"
+      }
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://thebiharvision.github.io/#nav-home",
+      "name": "Home",
+      "description": "The homepage of The Bihar Vision, with the latest Hindi/Bhojpuri podcast episodes and channel information.",
+      "url": "https://thebiharvision.github.io/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://thebiharvision.github.io/#nav-episodes",
+      "name": "Episodes",
+      "description": "A full list of The Bihar Vision podcast episodes, covering interviews, culture, education, and entertainment conversations.",
+      "url": "https://thebiharvision.github.io/episodes/"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://thebiharvision.github.io/#nav-about",
+      "name": "About",
+      "description": "The story, mission, and work of The Bihar Vision, along with information about founder Ritesh Sharma and host Alok Prasad.",
+      "url": "https://thebiharvision.github.io/about.html"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://thebiharvision.github.io/#nav-team",
+      "name": "Team",
+      "description": "The team behind The Bihar Vision: founder Ritesh Sharma and host Alok Prasad.",
+      "url": "https://thebiharvision.github.io/team/index.html"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://thebiharvision.github.io/#nav-faqs",
+      "name": "FAQs",
+      "description": "Answers to common questions about The Bihar Vision podcast, its episodes, and the channel.",
+      "url": "https://thebiharvision.github.io/faq.html"
+    },
+    {
+      "@type": "SiteNavigationElement",
+      "@id": "https://thebiharvision.github.io/#nav-contact",
+      "name": "Contact",
+      "description": "Contact The Bihar Vision for queries or collaborations at thebiharvision@gmail.com.",
+      "url": "https://thebiharvision.github.io/contact.html"
+    }
   ]
-}
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "The Bihar Vision",
-  "url": "https://thebiharvision.github.io",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://thebiharvision.github.io/search/?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
 }
 </script>
 </head>
