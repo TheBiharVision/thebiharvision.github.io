@@ -57,6 +57,7 @@ function episodePageTemplate(ep, slug) {
 <meta property="og:description" content="${ep.seoDescription}">
 <meta property="og:image" content="${ep.thumbnailUrl}">
 <meta property="og:url" content="${SITE_URL}/episodes/${slug}.html">
+<meta property="og:site_name" content="The Bihar Vision">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/the-bihar-vision-logo.png" />
 <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/the-bihar-vision-logo.png" />
