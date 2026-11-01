@@ -159,7 +159,7 @@
 
     el.innerHTML = `
       <div class="footer-border-strip">
-        <img src="/assets/img/bihar-vision-footer.png" alt="" role="presentation" loading="lazy">
+        <img src="/assets/img/bihar-vision-footer.webp" alt="" role="presentation" loading="lazy">
       </div>
       <div class="container">
         <div class="footer-grid">
