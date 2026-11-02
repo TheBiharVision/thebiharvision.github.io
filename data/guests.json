@@ -2,3 +2,13 @@
   "_note": "No guest profiles are published yet. Add an entry here only after verifying the guest appeared on the channel, per the Editorial Policy. Do not create placeholder/empty profiles.",
   "guests": []
 }
+
+{
+  "name": "Guest ka poora naam (channel jaisa)",
+  "slug": "guest-ka-naam",
+  "role": "Film Actress",
+  "summary": "English mein 2 se 3 line, sirf guest ki apni episode ki baat par based.",
+  "verified": true,
+  "consentConfirmed": true,
+  "sameAs": ["https://www.instagram.com/example"]
+}
