@@ -1,14 +1,74 @@
 {
-  "_note": "No guest profiles are published yet. Add an entry here only after verifying the guest appeared on the channel, per the Editorial Policy. Do not create placeholder/empty profiles.",
+  "_note": "Add an entry only after verifying the guest appeared on the channel and has consented to publication. Do not create placeholder profiles.",
   "guests": [
-{
-  "name": "Guest ka poora naam (channel jaisa)",
-  "slug": "guest-ka-naam",
-  "role": "Film Actress",
-  "summary": "English mein 2 se 3 line, sirf guest ki apni episode ki baat par based.",
-  "verified": true,
-  "consentConfirmed": true,
-  "sameAs": ["https://www.instagram.com/example"]
-}
-]
+    {
+      "name": "Tuntun Yadav",
+      "slug": "tuntun-yadav",
+      "role": "Singer",
+      "photo": "/assets/img/guests/tun-tun-yadav.jpg",
+      "summary": "Tuntun Yadav is a Bhojpuri singer, music director and folk artist from Ara, Bihar. He is one of the contemporary names in the Bhojpuri music industry.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.facebook.com/tuntunahiran01/",
+        "https://www.instagram.com/ahiran_tuntun_singer",
+        "https://www.youtube.com/c/tuntunyadavofficial1",
+        "https://open.spotify.com/artist/66b1f81ApSIvIqjVtbdzJb"
+      ]
+    },
+    {
+      "name": "Dev Singh",
+      "slug": "dev-singh",
+      "role": "Actor",
+      "photo": "/assets/img/guests/dev-singh.jpg",
+      "summary": "Dev Singh, also known as Dev Singh Rajput, is a Bhojpuri film actor known for antagonist roles. He has worked in more than 50 films.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.facebook.com/DevSinghActor/",
+        "https://www.instagram.com/devsingh6780/"
+      ]
+    },
+    {
+      "name": "Vijay Chauhan",
+      "slug": "vijay-chauhan",
+      "role": "Singer",
+      "photo": "/assets/img/guests/vijay-chauhan.jpg",
+      "summary": "Vijay Chauhan is a Bhojpuri singer, music composer, lyricist and actor. His work includes both energetic festive tracks and devotional or socially conscious music.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.facebook.com/SingerVijayChouhanji/",
+        "https://www.instagram.com/vijay__chauhan__official",
+        "https://www.youtube.com/@vijaychauhanofficial/"
+      ]
+    },
+    {
+      "name": "Kalyani Singh",
+      "slug": "kalyani-singh",
+      "role": "Actress",
+      "photo": "/assets/img/guests/kalyani-singh.jpg",
+      "summary": "Kalyani Singh is an Indian actress, model and digital content creator from Bihar. She has taken part in pageants and in MTV Model 2020.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.facebook.com/shrawyashreya.rajput.3/",
+        "https://www.instagram.com/shrawya_shreya_rajput/",
+        "https://www.youtube.com/@kalyanisinghvlog"
+      ]
+    },
+    {
+      "name": "Vinod Mishra",
+      "slug": "vinod-mishra",
+      "role": "Actor",
+      "photo": "/assets/img/guests/vinod-mishra.jpg",
+      "summary": "Vinod Mishra is an Indian actor, screenwriter and dialogue writer. He has worked in Bhojpuri films and Hindi television, often playing stern father and antagonist roles.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.facebook.com/vinodmishraofficial/",
+        "https://www.instagram.com/vinodmishraactor/"
+      ]
+    }
+  ]
 }
