@@ -26,7 +26,7 @@ const DATA_PATH = path.join(__dirname, '../data/episodes.json');
 const MANUAL_PATH = path.join(__dirname, '../data/episodes-manual.json');
 
 // Set to true to keep YouTube Shorts in data/episodes.json
-const INCLUDE_SHORTS = false;
+const INCLUDE_SHORTS = true;
 const SHORTS_MAX_SECONDS = 60;
 
 /**
