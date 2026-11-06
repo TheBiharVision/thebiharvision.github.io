@@ -93,6 +93,50 @@ function hostProfileLink(hostName) {
   return url ? `<a href="${url}">${esc(hostName)}</a>` : esc(hostName);
 }
 
+// ---------- social icons (inline SVG, no external files) ----------
+
+function socialIcon(url) {
+  const host = hostLabel(url).toLowerCase();
+
+  if (host.includes('facebook.com') || host === 'fb.com') {
+    return {
+      label: 'Facebook',
+      svg: '<path d="M14 8h2.5V4.5H14c-2.5 0-4 1.7-4 4.2V11H7.5v3.5H10V21h3.5v-6.5H16l.5-3.5h-3V8.7c0-.4.2-.7.9-.7z" fill="currentColor"/>'
+    };
+  }
+  if (host.includes('instagram.com')) {
+    return {
+      label: 'Instagram',
+      svg: '<rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor"/>'
+    };
+  }
+  if (host.includes('youtube.com') || host === 'youtu.be') {
+    return {
+      label: 'YouTube',
+      svg: '<rect x="2" y="5" width="20" height="14" rx="4" fill="none" stroke="currentColor" stroke-width="2"/><path d="M10 9l5 3-5 3z" fill="currentColor"/>'
+    };
+  }
+  if (host.includes('spotify.com')) {
+    return {
+      label: 'Spotify',
+      svg: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M7.5 9.5c3-1 6.5-.7 9 .8M8 12.5c2.5-.8 5.3-.5 7.3.7M8.5 15.3c2-.6 4-.4 5.6.5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>'
+    };
+  }
+  return {
+    label: host || 'Website',
+    svg: '<circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 12h18M12 3c2.5 2.7 2.5 15.3 0 18M12 3c-2.5 2.7-2.5 15.3 0 18" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+  };
+}
+
+function socialIconsHtml(links) {
+  if (!links.length) return '';
+  const items = links.map(u => {
+    const icon = socialIcon(u);
+    return `<a href="${esc(u)}" target="_blank" rel="noopener" aria-label="${esc(icon.label)}" title="${esc(icon.label)}" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid #D9C7A3;border-radius:50%;color:#2E4057;background:#FFFFFF;text-decoration:none;"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${icon.svg}</svg></a>`;
+  }).join('');
+  return `<h2>Links</h2><div class="social-icons" style="display:flex;flex-wrap:wrap;gap:.75rem;margin:.5rem 0 1rem;">${items}</div>`;
+}
+
 // ---------- data ----------
 
 function applyManualOverrides(episodes, manual) {
@@ -270,9 +314,7 @@ function guestPageTemplate(g, eps) {
     ? `<img class="guest-photo" src="${esc(g.photo)}" alt="${esc(g.name)}" width="200" height="200" style="width:200px;height:200px;object-fit:cover;border-radius:12px;margin:0 0 1rem;">`
     : '';
 
-  const linksHtml = links.length
-    ? `<h2>Links</h2><ul>${links.map(u => `<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(hostLabel(u))}</a></li>`).join('')}</ul>`
-    : '';
+  const linksHtml = socialIconsHtml(links);
 
   const jsonLd = {
     "@context": "https://schema.org",
