@@ -134,7 +134,7 @@ function socialIconsHtml(links) {
     const icon = socialIcon(u);
     return `<a href="${esc(u)}" target="_blank" rel="noopener" aria-label="${esc(icon.label)}" title="${esc(icon.label)}" style="display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid #D9C7A3;border-radius:50%;color:#2E4057;background:#FFFFFF;text-decoration:none;"><svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" focusable="false">${icon.svg}</svg></a>`;
   }).join('');
-  return `<h2>Links</h2><div class="social-icons" style="display:flex;flex-wrap:wrap;gap:.75rem;margin:.5rem 0 1rem;">${items}</div>`;
+  return `<h2>Connect on</h2><div class="social-icons" style="display:flex;flex-wrap:wrap;gap:.75rem;margin:.5rem 0 1rem;">${items}</div>`;
 }
 
 // ---------- data ----------
