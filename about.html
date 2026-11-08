@@ -16,6 +16,19 @@
 <meta name="theme-color" content="#2C1810" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#F2E6D0" media="(prefers-color-scheme: light)">
 <link rel="stylesheet" href="/assets/css/style.css">
+<style>
+  /* About page intro video: fits the content column on every screen size */
+  .about-video{margin:0 0 2.5rem;}
+  .about-video video{
+    display:block;
+    width:100%;
+    height:auto;
+    max-height:70vh;
+    background:#000;
+    border:1px solid var(--border);
+    border-radius:10px;
+  }
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -101,6 +114,14 @@
 
   <section class="section-tight">
     <div class="container" style="max-width:860px;">
+
+      <div class="about-video">
+        <video autoplay muted loop playsinline controls preload="auto" aria-label="The Bihar Vision team introduction video">
+          <source src="/assets/img/about-the-bihar-vision-team.mp4" type="video/mp4">
+          Your browser does not support this video.
+        </video>
+      </div>
+
       <p class="eyebrow">About The Bihar Vision</p>
       <h1>Honest conversations, rooted in Bihar.</h1>
       <p>The Bihar Vision is a Hindi/Bhojpuri YouTube podcast built around interviews and conversations covering culture, education, and entertainment relevant to Bihar and its people.</p>
@@ -129,7 +150,7 @@
       <p>Content is intended for a general audience across age groups; individual episode suitability depends on its specific subject matter.</p>
 
       <h2>Our Team</h2>
-      <div class="grid grid-2" style="margin-top:1.5rem;">
+      <div class="grid grid-2" style="margin:1.5rem 0 2.5rem;">
         <div class="episode-card" style="padding:1.5rem;">
           <h3>Ritesh Sharma — Founder</h3>
           <p class="text-secondary">Founder of The Bihar Vision.</p>
