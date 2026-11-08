@@ -367,13 +367,106 @@ function guestsIndexTemplate(guestRows) {
   const title = 'Guests — The Bihar Vision';
   const description = 'This directory lists guests who have appeared on The Bihar Vision, added only after verification against published episodes.';
 
-  const cardsHtml = guestRows.length
-    ? `<div class="grid">${guestRows.map(({ g, episodes }) => `
-    <a class="card" href="/guests/${g.slug}.html">
-      ${g.photo ? `<img src="${esc(g.photo)}" alt="${esc(g.name)}" loading="lazy" width="120" height="120" style="width:120px;height:120px;object-fit:cover;border-radius:50%;">` : ''}
+  // Alphabetical by name
+  const sorted = [...guestRows].sort((a, b) => a.g.name.localeCompare(b.g.name, 'en', { sensitivity: 'base' }));
+
+  const roles = [...new Set(sorted.map(r => (r.g.role || 'Guest').trim()))]
+    .sort((a, b) => a.localeCompare(b, 'en', { sensitivity: 'base' }));
+  const roleOptions = roles
+    .map(r => `<option value="${esc(r.toLowerCase())}">${esc(r)}</option>`)
+    .join('');
+
+  const cardsHtml = sorted.map(({ g, episodes }) => {
+    const role = (g.role || 'Guest').trim();
+    const photo = g.photo
+      ? `<img src="${esc(g.photo)}" alt="${esc(g.name)}" loading="lazy" width="160" height="160">`
+      : `<span class="guest-dir-noimg" aria-hidden="true">${esc(g.name.charAt(0).toUpperCase())}</span>`;
+    return `
+    <a class="guest-dir-card" href="/guests/${g.slug}.html" data-name="${esc(g.name.toLowerCase())}" data-role="${esc(role.toLowerCase())}">
+      ${photo}
       <h2>${esc(g.name)}</h2>
-      <p class="text-secondary">${esc(g.role || 'Guest')} · ${episodes.length} ${episodes.length === 1 ? 'episode' : 'episodes'}</p>
-    </a>`).join('')}</div>`
+      <p class="text-secondary">${esc(role)} · ${episodes.length} ${episodes.length === 1 ? 'episode' : 'episodes'}</p>
+    </a>`;
+  }).join('');
+
+  const directoryHtml = sorted.length
+    ? `
+    <style>
+      .guest-dir{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:1.5rem;}
+      .guest-dir-filter{background:#F2E6D0;border:1px solid #D9C7A3;border-radius:12px;padding:1rem;}
+      .guest-dir-filter-title{font-weight:700;margin:0 0 .25rem;color:#2B1B12;}
+      .guest-dir-filter label{display:block;font-weight:600;margin:.75rem 0 .35rem;color:#2B1B12;}
+      .guest-dir-filter input,.guest-dir-filter select{width:100%;padding:.6rem .7rem;border:1px solid #D9C7A3;border-radius:8px;background:#FFFFFF;color:#2B1B12;font:inherit;box-sizing:border-box;}
+      .guest-dir-filter button{margin-top:1rem;width:100%;padding:.6rem;border:1px solid #B5502D;border-radius:8px;background:transparent;color:#B5502D;font:inherit;cursor:pointer;}
+      .guest-dir-count{margin:0 0 1rem;}
+      .guest-dir-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1rem;}
+      .guest-dir-card{display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;color:#2B1B12;padding:.5rem;border-radius:12px;}
+      .guest-dir-card[hidden]{display:none !important;}
+      .guest-dir-card:hover h2{color:#B5502D;}
+      .guest-dir-card:focus-visible{outline:3px solid #B5502D;outline-offset:3px;}
+      .guest-dir-card img,.guest-dir-noimg{width:100%;max-width:160px;aspect-ratio:1/1;height:auto;border-radius:50%;object-fit:cover;}
+      .guest-dir-noimg{display:flex;align-items:center;justify-content:center;background:#2E4057;color:#FBF6EC;font-size:2.5rem;font-weight:700;}
+      .guest-dir-card h2{font-size:1.05rem;margin:.6rem 0 .2rem;}
+      .guest-dir-card p{margin:0;font-size:.9rem;}
+      @media (min-width:600px) and (max-width:899px){
+        .guest-dir-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+      }
+      @media (min-width:900px){
+        .guest-dir{grid-template-columns:240px 1fr;align-items:start;}
+        .guest-dir-filter{position:sticky;top:1rem;}
+        .guest-dir-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+      }
+    </style>
+    <div class="guest-dir">
+      <aside class="guest-dir-filter" aria-label="Filter guests">
+        <p class="guest-dir-filter-title">Filter guests</p>
+        <label for="guest-search">Search by name</label>
+        <input id="guest-search" type="search" placeholder="Type a name" autocomplete="off">
+        <label for="guest-role">Role</label>
+        <select id="guest-role">
+          <option value="">All roles</option>
+          ${roleOptions}
+        </select>
+        <button type="button" id="guest-reset">Clear filter</button>
+      </aside>
+      <div>
+        <p class="text-secondary guest-dir-count" id="guest-count" aria-live="polite">Showing ${sorted.length} of ${sorted.length} ${sorted.length === 1 ? 'guest' : 'guests'}</p>
+        <div class="guest-dir-grid" id="guest-grid">${cardsHtml}</div>
+        <p class="text-secondary" id="guest-empty" hidden>No guests match this filter.</p>
+      </div>
+    </div>
+    <script>
+      (function () {
+        var search = document.getElementById('guest-search');
+        var role = document.getElementById('guest-role');
+        var reset = document.getElementById('guest-reset');
+        var cards = Array.prototype.slice.call(document.querySelectorAll('.guest-dir-card'));
+        var empty = document.getElementById('guest-empty');
+        var count = document.getElementById('guest-count');
+
+        function apply() {
+          var q = search.value.trim().toLowerCase();
+          var r = role.value;
+          var shown = 0;
+          cards.forEach(function (c) {
+            var ok = (!q || c.getAttribute('data-name').indexOf(q) !== -1) &&
+                     (!r || c.getAttribute('data-role') === r);
+            c.hidden = !ok;
+            if (ok) shown++;
+          });
+          empty.hidden = shown !== 0;
+          count.textContent = 'Showing ' + shown + ' of ' + cards.length + (cards.length === 1 ? ' guest' : ' guests');
+        }
+
+        search.addEventListener('input', apply);
+        role.addEventListener('change', apply);
+        reset.addEventListener('click', function () {
+          search.value = '';
+          role.value = '';
+          apply();
+        });
+      })();
+    </script>`
     : `<p class="text-secondary">Guest profiles will be added after verification.</p>`;
 
   const jsonLd = {
@@ -382,7 +475,7 @@ function guestsIndexTemplate(guestRows) {
       { "@type": "CollectionPage", "@id": `${url}#webpage`, url, name: title, description },
       {
         "@type": "ItemList",
-        itemListElement: guestRows.map((r, i) => ({
+        itemListElement: sorted.map((r, i) => ({
           "@type": "ListItem",
           position: i + 1,
           url: `${SITE_URL}/guests/${r.g.slug}.html`,
@@ -412,7 +505,7 @@ function guestsIndexTemplate(guestRows) {
     <p class="eyebrow">Directory</p>
     <h1>Guests</h1>
     <p class="text-secondary">${esc(description)}</p>
-    ${cardsHtml}
+    ${directoryHtml}
   </section>
 ` + pageFoot();
 }
