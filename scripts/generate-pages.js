@@ -15,6 +15,11 @@
  * A guest page is created only when the guest entry has verified: true,
  * consentConfirmed: true and a valid slug. Other guest names are shown as plain text.
  *
+ * Episode page:
+ *   - Summary limited to SUMMARY_MAX_WORDS words (hashtags and links removed),
+ *     with a "Read more on YouTube" button when the text is cut
+ *   - Slider of the RECENT_COUNT latest long videos (Shorts excluded), current episode left out
+ *
  * Run: node scripts/generate-pages.js
  */
 const fs = require('fs');
@@ -26,6 +31,12 @@ const DATA_DIR = path.join(ROOT, 'data');
 const EPISODES_DIR = path.join(ROOT, 'episodes');
 const GUESTS_DIR = path.join(ROOT, 'guests');
 const SLUG_RE = /^[a-z0-9-]+$/;
+
+const SUMMARY_MAX_WORDS = 200;
+const RECENT_COUNT = 5;
+// Videos at or below this length are treated as Shorts and left out of the recent list.
+// Set to 0 to include Shorts.
+const SHORTS_MAX_SECONDS = 180;
 
 // ---------- helpers ----------
 
@@ -91,6 +102,56 @@ function hostProfileLink(hostName) {
   };
   const url = knownHosts[hostName];
   return url ? `<a href="${url}">${esc(hostName)}</a>` : esc(hostName);
+}
+
+// ---------- episode summary and duration ----------
+
+// Returns the description as plain text, limited to maxWords words.
+// Hashtags, links and asterisks are removed. "truncated" is true when words were cut.
+function summaryText(description, maxWords) {
+  const cleaned = String(description ?? '')
+    .replace(/https?:\/\/\S+/g, ' ')
+    .replace(/#[^\s#]+/g, ' ')
+    .replace(/\*/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  if (!cleaned) return { text: '', truncated: false };
+
+  const words = cleaned.split(' ');
+  if (words.length <= maxWords) return { text: cleaned, truncated: false };
+
+  return { text: words.slice(0, maxWords).join(' ') + '…', truncated: true };
+}
+
+// Accepts seconds (number), ISO 8601 (PT3M20S), plain seconds ("200") or "m:ss" / "h:mm:ss".
+function parseDurationSeconds(value) {
+  if (typeof value === 'number' && Number.isFinite(value)) return value;
+  if (typeof value !== 'string') return null;
+
+  const v = value.trim();
+  if (!v) return null;
+
+  const iso = v.match(/^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+(?:\.\d+)?)S)?$/i);
+  if (iso && v.length > 2) {
+    return (Number(iso[1] || 0) * 3600) + (Number(iso[2] || 0) * 60) + Number(iso[3] || 0);
+  }
+  if (/^\d+$/.test(v)) return Number(v);
+  if (/^\d+(:\d+){1,2}$/.test(v)) {
+    return v.split(':').reduce((acc, n) => acc * 60 + Number(n), 0);
+  }
+  return null;
+}
+
+function durationSeconds(ep) {
+  const fromDuration = parseDurationSeconds(ep.duration);
+  if (fromDuration !== null) return fromDuration;
+  return parseDurationSeconds(ep.durationDisplay);
+}
+
+function isShort(ep) {
+  const seconds = durationSeconds(ep);
+  return seconds !== null && seconds <= SHORTS_MAX_SECONDS;
 }
 
 // ---------- social icons (inline SVG, no external files) ----------
@@ -233,7 +294,81 @@ function pageFoot() {
 
 // ---------- episode page ----------
 
-function episodePageTemplate(ep, slug, verifiedGuests) {
+// items: latest long videos (already sorted newest first), current episode may be included; it is skipped here.
+function recentEpisodesHtml(items, currentEp) {
+  const picks = items.filter(({ ep }) => ep !== currentEp).slice(0, RECENT_COUNT);
+  if (!picks.length) return '';
+
+  const cards = picks.map(({ ep, slug }) => `
+          <a class="recent-eps-card" href="/episodes/${slug}.html">
+            ${ep.thumbnailUrl ? `<img src="${esc(ep.thumbnailUrl)}" alt="" loading="lazy" width="320" height="180">` : ''}
+            <h3>${esc(ep.title)}</h3>
+            <p class="text-secondary">${esc(String(ep.publishedAt || '').slice(0, 10))}</p>
+          </a>`).join('');
+
+  return `
+  <section class="container recent-eps" aria-labelledby="recent-eps-title">
+    <style>
+      .recent-eps{margin:2.5rem auto 0;}
+      .recent-eps h2{margin:0 0 1rem;}
+      .recent-eps-wrap{position:relative;}
+      .recent-eps-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:.25rem 0 1rem;-webkit-overflow-scrolling:touch;}
+      .recent-eps-card{flex:0 0 60%;min-width:0;scroll-snap-align:start;text-decoration:none;color:#2B1B12;border-radius:10px;}
+      .recent-eps-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;}
+      .recent-eps-card h3{font-size:.95rem;line-height:1.35;margin:.5rem 0 .25rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+      .recent-eps-card p{margin:0;font-size:.85rem;}
+      .recent-eps-card:hover h3{color:#B5502D;}
+      .recent-eps-card:focus-visible,.recent-eps-track:focus-visible,.recent-eps-btn:focus-visible{outline:3px solid #B5502D;outline-offset:3px;}
+      .recent-eps-btn{display:none;position:absolute;top:50%;transform:translateY(-50%);z-index:1;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;border:1px solid #D9C7A3;background:#FFFFFF;color:#2E4057;font-size:1.6rem;line-height:1;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.12);padding:0;}
+      .recent-eps-btn:disabled{opacity:.35;cursor:default;}
+      .recent-eps-prev{left:-14px;}
+      .recent-eps-next{right:-14px;}
+      @media (min-width:600px){
+        .recent-eps-card{flex-basis:calc((100% - 2rem) / 3);}
+        .recent-eps-btn{display:flex;}
+      }
+      @media (min-width:900px){
+        .recent-eps-card{flex-basis:calc((100% - 4rem) / 5);}
+      }
+    </style>
+    <h2 id="recent-eps-title">Recent episodes</h2>
+    <div class="recent-eps-wrap">
+      <button type="button" class="recent-eps-btn recent-eps-prev" aria-label="Show previous episodes">&#8249;</button>
+      <div class="recent-eps-track" id="recent-eps-track" tabindex="0" role="region" aria-label="Recent episodes">${cards}
+      </div>
+      <button type="button" class="recent-eps-btn recent-eps-next" aria-label="Show next episodes">&#8250;</button>
+    </div>
+  </section>
+  <script>
+    (function () {
+      var track = document.getElementById('recent-eps-track');
+      var prev = document.querySelector('.recent-eps-prev');
+      var next = document.querySelector('.recent-eps-next');
+      if (!track || !prev || !next) return;
+
+      function step() {
+        var card = track.querySelector('.recent-eps-card');
+        return card ? card.getBoundingClientRect().width + 16 : track.clientWidth * 0.8;
+      }
+      function update() {
+        var max = track.scrollWidth - track.clientWidth - 2;
+        prev.disabled = track.scrollLeft <= 2;
+        next.disabled = track.scrollLeft >= max;
+      }
+      prev.addEventListener('click', function () {
+        track.scrollBy({ left: -step(), behavior: 'smooth' });
+      });
+      next.addEventListener('click', function () {
+        track.scrollBy({ left: step(), behavior: 'smooth' });
+      });
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    })();
+  </script>`;
+}
+
+function episodePageTemplate(ep, slug, verifiedGuests, recentItems) {
   const title = ep.seoTitle || ep.title || 'Episode';
   const description = ep.seoDescription || ep.description || '';
   const canonical = `${SITE_URL}/episodes/${slug}.html`;
@@ -243,14 +378,12 @@ function episodePageTemplate(ep, slug, verifiedGuests) {
     ? ep.topics.map(t => esc(t)).join(' · ')
     : 'Episode';
 
-  const chaptersHtml = Array.isArray(ep.chapters) && ep.chapters.length
-    ? `<ul>${ep.chapters.map(c => `<li>${esc(c.time)} — ${esc(c.label)}</li>`).join('')}</ul>`
-    : `<p class="text-secondary">Chapter timestamps are not yet available for this episode. <span class="badge-dark">Unconfirmed</span></p>`;
-
-  // Transcript is kept as HTML on purpose (same as before)
-  const transcriptHtml = ep.transcript
-    ? `<div>${ep.transcript}</div>`
-    : `<p class="text-secondary">A transcript is not currently available for this episode.</p>`;
+  const summary = summaryText(ep.description, SUMMARY_MAX_WORDS);
+  const summaryHtml = summary.text
+    ? `<h2>Episode Summary</h2><p>${esc(summary.text)}</p>${summary.truncated
+        ? `<p><a class="btn btn-outline" href="${esc(ep.youtubeUrl)}" target="_blank" rel="noopener">Read more on YouTube</a></p>`
+        : ''}`
+    : '';
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -282,11 +415,10 @@ function episodePageTemplate(ep, slug, verifiedGuests) {
       <iframe src="https://www.youtube-nocookie.com/embed/${esc(ep.youtubeVideoId)}" title="${esc(ep.title)} | The Bihar Vision" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     </div>
     <a class="btn btn-outline" href="${esc(ep.youtubeUrl)}" target="_blank" rel="noopener">Watch on YouTube</a>
-    <h2>Episode Summary</h2><p>${esc(ep.description)}</p>
+    ${summaryHtml}
     <h2>Host &amp; Guests</h2><p><strong>Host:</strong> ${hostProfileLink(ep.host)}${names.length ? `<br><strong>Guests:</strong> ${guestsLineHtml(names, verifiedGuests)}` : ''}</p>
-    <h2>Chapters</h2>${chaptersHtml}
-    <h2>Transcript</h2>${transcriptHtml}
   </article>
+  ${recentEpisodesHtml(recentItems, ep)}
 ` + pageFoot();
 }
 
@@ -558,6 +690,12 @@ function main() {
   const verifiedGuests = buildGuestRegistry(guestsData);
   const items = episodes.map(ep => ({ ep, slug: ensureValidSlug(ep) }));
 
+  // Newest long videos for the "Recent episodes" slider (Shorts excluded)
+  const recentPool = items
+    .filter(({ ep }) => !isShort(ep))
+    .sort((a, b) => String(b.ep.publishedAt || '').localeCompare(String(a.ep.publishedAt || '')));
+  const shortsCount = items.length - recentPool.length;
+
   // Names used in episodes that have no verified profile (shown as plain text)
   const plainNames = new Set();
   items.forEach(({ ep }) => guestNamesOf(ep).forEach(name => {
@@ -579,7 +717,7 @@ function main() {
 
   // Episode pages
   items.forEach(({ ep, slug }) => {
-    fs.writeFileSync(path.join(EPISODES_DIR, `${slug}.html`), episodePageTemplate(ep, slug, verifiedGuests));
+    fs.writeFileSync(path.join(EPISODES_DIR, `${slug}.html`), episodePageTemplate(ep, slug, verifiedGuests, recentPool));
   });
 
   // Guest pages (verified only)
@@ -631,7 +769,7 @@ function main() {
   const allPages = [...staticPages, ...guestPages, ...episodePages];
   writeSitemap(allPages);
 
-  console.log(`[generate-pages] Episode pages: ${items.length}. Guest pages: ${guestRows.length}. Sitemap URLs: ${allPages.length}.`);
+  console.log(`[generate-pages] Episode pages: ${items.length}. Guest pages: ${guestRows.length}. Sitemap URLs: ${allPages.length}. Shorts left out of recent list: ${shortsCount}.`);
 }
 
 main();
