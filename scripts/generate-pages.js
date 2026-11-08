@@ -392,12 +392,15 @@ function guestsIndexTemplate(guestRows) {
   const directoryHtml = sorted.length
     ? `
     <style>
-      .guest-dir{display:grid;grid-template-columns:1fr;gap:1.5rem;margin-top:1.5rem;}
+      .guest-dir{display:flex;flex-direction:column;gap:1.25rem;margin-top:1.5rem;}
       .guest-dir-filter{background:#F2E6D0;border:1px solid #D9C7A3;border-radius:12px;padding:1rem;}
-      .guest-dir-filter-title{font-weight:700;margin:0 0 .25rem;color:#2B1B12;}
-      .guest-dir-filter label{display:block;font-weight:600;margin:.75rem 0 .35rem;color:#2B1B12;}
-      .guest-dir-filter input,.guest-dir-filter select{width:100%;padding:.6rem .7rem;border:1px solid #D9C7A3;border-radius:8px;background:#FFFFFF;color:#2B1B12;font:inherit;box-sizing:border-box;}
-      .guest-dir-filter button{margin-top:1rem;width:100%;padding:.6rem;border:1px solid #B5502D;border-radius:8px;background:transparent;color:#B5502D;font:inherit;cursor:pointer;}
+      .guest-dir-filter-title{font-weight:700;margin:0 0 .75rem;color:#2B1B12;}
+      .guest-dir-fields{display:flex;flex-wrap:wrap;gap:.75rem;align-items:flex-end;}
+      .guest-dir-field{flex:1 1 200px;min-width:0;}
+      .guest-dir-field label{display:block;font-weight:600;margin:0 0 .35rem;color:#2B1B12;font-size:.9rem;}
+      .guest-dir-field input,.guest-dir-field select{width:100%;padding:.6rem .7rem;border:1px solid #D9C7A3;border-radius:8px;background:#FFFFFF;color:#2B1B12;font:inherit;box-sizing:border-box;}
+      .guest-dir-actions{flex:0 0 auto;}
+      .guest-dir-actions button{padding:.6rem 1rem;border:1px solid #B5502D;border-radius:8px;background:transparent;color:#B5502D;font:inherit;cursor:pointer;white-space:nowrap;}
       .guest-dir-count{margin:0 0 1rem;}
       .guest-dir-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.5rem 1rem;}
       .guest-dir-card{display:flex;flex-direction:column;align-items:center;text-align:center;text-decoration:none;color:#2B1B12;padding:.5rem;border-radius:12px;}
@@ -412,22 +415,28 @@ function guestsIndexTemplate(guestRows) {
         .guest-dir-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
       }
       @media (min-width:900px){
-        .guest-dir{grid-template-columns:240px 1fr;align-items:start;}
-        .guest-dir-filter{position:sticky;top:1rem;}
         .guest-dir-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
       }
     </style>
     <div class="guest-dir">
       <aside class="guest-dir-filter" aria-label="Filter guests">
         <p class="guest-dir-filter-title">Filter guests</p>
-        <label for="guest-search">Search by name</label>
-        <input id="guest-search" type="search" placeholder="Type a name" autocomplete="off">
-        <label for="guest-role">Role</label>
-        <select id="guest-role">
-          <option value="">All roles</option>
-          ${roleOptions}
-        </select>
-        <button type="button" id="guest-reset">Clear filter</button>
+        <div class="guest-dir-fields">
+          <div class="guest-dir-field">
+            <label for="guest-search">Search by name</label>
+            <input id="guest-search" type="search" placeholder="Type a name" autocomplete="off">
+          </div>
+          <div class="guest-dir-field">
+            <label for="guest-role">Role</label>
+            <select id="guest-role">
+              <option value="">All roles</option>
+              ${roleOptions}
+            </select>
+          </div>
+          <div class="guest-dir-field guest-dir-actions">
+            <button type="button" id="guest-reset">Clear filter</button>
+          </div>
+        </div>
       </aside>
       <div>
         <p class="text-secondary guest-dir-count" id="guest-count" aria-live="polite">Showing ${sorted.length} of ${sorted.length} ${sorted.length === 1 ? 'guest' : 'guests'}</p>
