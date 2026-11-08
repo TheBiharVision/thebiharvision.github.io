@@ -13,7 +13,9 @@
       "duration": "PT56S",
       "durationDisplay": null,
       "host": "Alok Prasad",
-      "guests": [],
+      "guests": [
+        "Shubham Raj"
+      ],
       "topics": [],
       "chapters": [],
       "transcript": null,
@@ -141,7 +143,9 @@
       "duration": "PT1H17M47S",
       "durationDisplay": null,
       "host": "Alok Prasad",
-      "guests": [],
+      "guests": [
+        "Shubham Raj"
+      ],
       "topics": [],
       "chapters": [],
       "transcript": null,
