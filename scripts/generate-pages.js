@@ -33,7 +33,7 @@ const GUESTS_DIR = path.join(ROOT, 'guests');
 const SLUG_RE = /^[a-z0-9-]+$/;
 
 const SUMMARY_MAX_WORDS = 200;
-const RECENT_COUNT = 5;
+const RECENT_COUNT = 10;
 // Videos at or below this length are treated as Shorts and left out of the recent list.
 // Set to 0 to include Shorts.
 const SHORTS_MAX_SECONDS = 180;
@@ -309,7 +309,7 @@ function recentEpisodesHtml(items, currentEp) {
   return `
   <section class="container recent-eps" aria-labelledby="recent-eps-title">
     <style>
-      .recent-eps{margin:2.5rem auto 0;}
+      .recent-eps{max-width:860px;margin:2.5rem auto 0;}
       .recent-eps h2{margin:0 0 1rem;}
       .recent-eps-wrap{position:relative;}
       .recent-eps-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:.25rem 0 1rem;-webkit-overflow-scrolling:touch;}
