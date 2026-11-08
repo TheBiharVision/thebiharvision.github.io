@@ -17,6 +17,19 @@
       ]
     },
     {
+      "name": "Mahi Shrivastava",
+      "slug": "mahi-shrivastava",
+      "role": "Actress",
+      "photo": "/assets/img/guests/mahi-shrivastava.jpg",
+      "summary": "Mahi Shrivastava is a popular Indian actress and dancer who primarily works in the Bhojpuri film and music industry.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.instagram.com/mahishrivastavaofficial",
+        "https://www.youtube.com/channel/UCPz2NaZsioa6ZpfW-Y1nhJQ"
+      ]
+    },
+    {
       "name": "Dev Singh",
       "slug": "dev-singh",
       "role": "Actor",
