@@ -17,6 +17,20 @@
       ]
     },
     {
+      "name": "Shubham Raj",
+      "slug": "shubham-raj",
+      "role": "Singer",
+      "photo": "/assets/img/guests/shubham-raj.jpg",
+      "summary": "Shubham Raj, professionally known by his popular industry moniker SBR (or SBR ON THE MUSIC), is a multi-talented Indian singer, music composer, music producer, and audio engineer. Emerging from Bhagalpur, Bihar, and later establishing a creative base in Mumbai, Maharashtra, he has become one of the defining new-age forces in the modern Bhojpuri music industry.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.instagram.com/shubhamsbr/",
+        "https://music.youtube.com/channel/UCHcyIbnE_rIz3bBG2Pr912w",
+        "https://open.spotify.com/artist/1pL9FYc9SfCnnokFNrqqUp"
+      ]
+    },
+    {
       "name": "Mahi Shrivastava",
       "slug": "mahi-shrivastava",
       "role": "Actress",
