@@ -431,10 +431,25 @@ section{padding:var(--gap-xl) 0;}
 .faq-answer{padding:0 0 1.25rem;max-width:75ch;color:var(--text-secondary);}
 .faq-answer[hidden]{display:none;}
 
-/* ---------- Breadcrumb ---------- */
-.breadcrumb{font-size:.82rem;color:var(--text-secondary);padding:1rem 0;}
+/* ---------- Breadcrumb ----------
+   Same max-width and side padding as the header and .container, so the
+   "Home" link lines up with the logo on every page (desktop and mobile). */
+.breadcrumb{
+  max-width:var(--container);
+  margin:0 auto;
+  padding:1rem 1.5rem;
+  box-sizing:border-box;
+  font-size:.82rem;
+  color:var(--text-secondary);
+}
 .breadcrumb a{text-decoration:none;color:var(--accent-terracotta);}
 .breadcrumb a:hover{text-decoration:underline;}
+/* Breadcrumb placed inside a .container wrapper (generated pages): the wrapper
+   already provides the side padding, so don't add it twice */
+.container .breadcrumb{
+  padding-left:0;
+  padding-right:0;
+}
 
 /* ---------- Table ---------- */
 table{width:100%;border-collapse:collapse;margin:1.5rem 0;}
