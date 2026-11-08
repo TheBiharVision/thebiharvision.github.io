@@ -296,9 +296,22 @@ function episodeCardsHtml(items) {
   if (!items.length) {
     return `<p class="text-secondary">No episodes are linked to this guest yet.</p>`;
   }
-  return `<div class="grid">${items.map(({ ep, slug }) => `
-    <a class="card" href="/episodes/${slug}.html">
-      ${ep.thumbnailUrl ? `<img src="${esc(ep.thumbnailUrl)}" alt="" loading="lazy" width="320" height="180" style="width:100%;height:auto;">` : ''}
+  return `
+    <style>
+      .guest-ep-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.25rem .75rem;margin-top:1rem;}
+      .guest-ep-card{display:block;text-decoration:none;color:#2B1B12;border-radius:10px;}
+      .guest-ep-card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;}
+      .guest-ep-card h3{font-size:.95rem;line-height:1.35;margin:.5rem 0 .25rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+      .guest-ep-card p{margin:0;font-size:.85rem;}
+      .guest-ep-card:hover h3{color:#B5502D;}
+      .guest-ep-card:focus-visible{outline:3px solid #B5502D;outline-offset:3px;}
+      @media (min-width:900px){
+        .guest-ep-grid{grid-template-columns:repeat(4,minmax(0,1fr));}
+      }
+    </style>
+    <div class="guest-ep-grid">${items.map(({ ep, slug }) => `
+    <a class="guest-ep-card" href="/episodes/${slug}.html">
+      ${ep.thumbnailUrl ? `<img src="${esc(ep.thumbnailUrl)}" alt="" loading="lazy" width="320" height="180">` : ''}
       <h3>${esc(ep.title)}</h3>
       <p class="text-secondary">${esc(String(ep.publishedAt || '').slice(0, 10))}</p>
     </a>`).join('')}</div>`;
