@@ -31,6 +31,20 @@
       ]
     },
     {
+      "name": "Jyotika Paswan",
+      "slug": "jyotika-paswan",
+      "role": "Model or Social Media Influencer",
+      "photo": "/assets/img/guests/jyotika-paswan.jpg",
+      "summary": "Jyotika Paswan is a prominent Indian model, social media influencer, and dancer best known as the winner of the Bhojpuri reality television show Memsaab No. 1 (Chalani Ke Chalal Babuni) telecasted on Zee Ganga.",
+      "verified": true,
+      "consentConfirmed": true,
+      "sameAs": [
+        "https://www.instagram.com/iamjyotikapaswan/",
+        "https://www.facebook.com/iamjyotikapaswan/",
+        "https://www.youtube.com/@_Jyotikapaswan"
+      ]
+    },
+    {
       "name": "Anita Rawat",
       "slug": "anita-rawat",
       "role": "Actress",
