@@ -819,7 +819,9 @@
       "duration": "PT10M58S",
       "durationDisplay": null,
       "host": "Alok Prasad",
-      "guests": [],
+      "guests": [
+        "Anita Rawat"
+      ],
       "topics": [],
       "chapters": [],
       "transcript": null,
@@ -882,7 +884,9 @@
       "duration": "PT2H42M52S",
       "durationDisplay": null,
       "host": "Alok Prasad",
-      "guests": [],
+      "guests": [
+        "Anita Rawat"
+      ],
       "topics": [],
       "chapters": [],
       "transcript": null,
