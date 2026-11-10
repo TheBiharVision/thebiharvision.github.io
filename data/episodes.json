@@ -13,7 +13,9 @@
       "duration": "PT1H30M43S",
       "durationDisplay": null,
       "host": "Alok Prasad",
-      "guests": [],
+      "guests": [
+        "Mahi Shrivastava"
+      ],
       "topics": [],
       "chapters": [],
       "transcript": null,
