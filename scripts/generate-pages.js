@@ -461,21 +461,32 @@ function guestPageTemplate(g, eps) {
 
   const linksHtml = socialIconsHtml(links);
 
+  // ProfilePage wraps the Person (mainEntity), which is the structure Google's
+  // "Profile page" enhancement reads. BreadcrumbList is a separate entry in the same graph.
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
       {
-        "@type": "Person",
-        "@id": `${canonical}#person`,
-        name: g.name,
-        jobTitle: g.role || undefined,
-        description,
-        image: g.photo ? absUrl(g.photo) : undefined,
+        "@type": "ProfilePage",
+        "@id": `${canonical}#webpage`,
         url: canonical,
-        sameAs: links.length ? links : undefined
+        name: title,
+        description,
+        breadcrumb: { "@id": `${canonical}#breadcrumb` },
+        mainEntity: {
+          "@type": "Person",
+          "@id": `${canonical}#person`,
+          name: g.name,
+          jobTitle: g.role || undefined,
+          description,
+          image: g.photo ? absUrl(g.photo) : undefined,
+          url: canonical,
+          sameAs: links.length ? links : undefined
+        }
       },
       {
         "@type": "BreadcrumbList",
+        "@id": `${canonical}#breadcrumb`,
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
           { "@type": "ListItem", position: 2, name: "Guests", item: `${SITE_URL}/guests/` },
