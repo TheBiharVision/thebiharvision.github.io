@@ -20,6 +20,31 @@
 <meta name="theme-color" content="#2C1810" media="(prefers-color-scheme: dark)">
 <meta name="theme-color" content="#F2E6D0" media="(prefers-color-scheme: light)">
 <link rel="stylesheet" href="/assets/css/style.css">
+<style>
+/* Home guest slider */
+.hg-wrap{position:relative;}
+.hg-track{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:.25rem .25rem 1rem;scrollbar-width:none;-webkit-overflow-scrolling:touch;}
+.hg-track::-webkit-scrollbar{display:none;}
+.hg-card{flex:0 0 calc((100% - 1rem) / 2);scroll-snap-align:start;display:flex;flex-direction:column;align-items:center;text-align:center;padding:1.25rem .75rem;background:var(--bg);border:1px solid var(--border);border-radius:var(--radius);text-decoration:none;color:var(--text);transition:border-color var(--transition);}
+.hg-card:hover{border-color:var(--accent-terracotta);}
+.hg-card h3{font-size:1rem;margin:.9rem 0 .2rem;line-height:1.3;}
+.hg-card p{margin:0;font-size:.9rem;}
+.hg-photo{width:110px;height:110px;border-radius:50%;overflow:hidden;background:var(--bg-secondary);display:flex;align-items:center;justify-content:center;}
+.hg-photo img{width:100%;height:100%;object-fit:cover;display:block;}
+.hg-photo span{font-size:2.4rem;font-weight:700;color:var(--accent-terracotta);}
+.hg-link{margin-top:.6rem;font-weight:700;font-size:.9rem;color:var(--accent-terracotta);}
+.hg-btn{display:none;}
+@media (min-width:600px){
+  .hg-btn{display:flex;position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:1.4rem;line-height:1;align-items:center;justify-content:center;cursor:pointer;z-index:2;}
+  .hg-btn:disabled{opacity:.35;cursor:default;}
+  .hg-prev{left:-14px;}
+  .hg-next{right:-14px;}
+}
+@media (min-width:900px){
+  .hg-card{flex-basis:calc((100% - 3rem) / 4);}
+  .hg-photo{width:140px;height:140px;}
+}
+</style>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -215,6 +240,26 @@
     </div>
   </section>
 
+  <!-- GUEST SLIDER -->
+  <hr class="divider">
+  <section id="home-guests-section" aria-labelledby="home-guests-title" hidden>
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:end;flex-wrap:wrap;gap:1rem;">
+        <div>
+          <p class="eyebrow">Guests</p>
+          <h2 id="home-guests-title">Guests on The Bihar Vision</h2>
+          <p class="text-secondary" style="max-width:60ch;">Artists, actors and creators who have joined our conversations.</p>
+        </div>
+        <a class="btn btn-outline" href="/guests/">See all guests</a>
+      </div>
+      <div class="hg-wrap" style="margin-top:2rem;">
+        <button class="hg-btn hg-prev" type="button" aria-label="Previous guests">&#8249;</button>
+        <div class="hg-track" id="home-guests-track"></div>
+        <button class="hg-btn hg-next" type="button" aria-label="Next guests">&#8250;</button>
+      </div>
+    </div>
+  </section>
+
   <!-- POPULAR EPISODES -->
   <section>
     <div class="container">
@@ -323,6 +368,65 @@ document.addEventListener('DOMContentLoaded', async () => {
     ? popularEpisodes.map(BiharVisionData.episodeCardHTML).join('')
     : '<p class="text-secondary">More fan favourites coming soon as new episodes are published.</p>';
 });
+</script>
+
+<script>
+(function () {
+  const section = document.getElementById('home-guests-section');
+  const track = document.getElementById('home-guests-track');
+  const prev = document.querySelector('.hg-prev');
+  const next = document.querySelector('.hg-next');
+  if (!section || !track || !prev || !next) return;
+
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[c]));
+
+  function updateButtons() {
+    const max = track.scrollWidth - track.clientWidth;
+    prev.disabled = track.scrollLeft <= 2;
+    next.disabled = track.scrollLeft >= max - 2;
+  }
+
+  function slide(dir) {
+    const card = track.querySelector('.hg-card');
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(track).columnGap) || 16;
+    track.scrollBy({ left: dir * (card.getBoundingClientRect().width + gap), behavior: 'smooth' });
+  }
+
+  prev.addEventListener('click', () => slide(-1));
+  next.addEventListener('click', () => slide(1));
+  track.addEventListener('scroll', updateButtons, { passive: true });
+  window.addEventListener('resize', updateButtons);
+
+  fetch('/data/guests.json', { cache: 'no-cache' })
+    .then(r => (r.ok ? r.json() : Promise.reject(r.status)))
+    .then(data => {
+      const list = Array.isArray(data) ? data : (data.guests || []);
+      const guests = list
+        .filter(g => g && g.verified === true && g.consentConfirmed === true && /^[a-z0-9-]+$/.test(g.slug || ''))
+        .sort((a, b) => (a.name || '').localeCompare(b.name || '', 'en', { sensitivity: 'base' }));
+
+      if (!guests.length) return;
+
+      track.innerHTML = guests.map(g => `
+        <a class="hg-card" href="/guests/${esc(g.slug)}.html">
+          <div class="hg-photo">${
+            g.photo
+              ? `<img src="${esc(g.photo)}" alt="${esc(g.name)}" width="140" height="140" loading="lazy">`
+              : `<span>${esc((g.name || '?').charAt(0))}</span>`
+          }</div>
+          <h3>${esc(g.name)}</h3>
+          <p class="text-secondary">${esc(g.role || '')}</p>
+          <span class="hg-link">View profile →</span>
+        </a>`).join('');
+
+      section.hidden = false;
+      updateButtons();
+    })
+    .catch(() => { section.hidden = true; });
+})();
 </script>
 </body>
 </html>
